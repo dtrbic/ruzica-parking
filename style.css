@@ -89,7 +89,7 @@ p{
    OSNOVNO
    ========================================================= */
 
-#smjestaj,
+#smjestaji,
 #rezervacija,
 #recenzijeG,
 #rezervacijeG,
@@ -105,7 +105,7 @@ p{
 
 /* sadržaj iznad dekoracija */
 
-#smjestaj > *,
+#smjestaji > *,
 #rezervacija > *,
 #recenzijeG > *,
 #rezervacijeG > *,
@@ -2723,18 +2723,14 @@ text-align:center;
     width: 100%;
     max-width: 450px;
     height: 200px;
-
     object-fit: cover;
-
     display: block;
-
     border-radius: 10px;
 }
 
 
 .soba-kartica h3 {
     margin: 18px 0 15px;
-
     font-size: 24px;
     color: #0b255c;
 }
@@ -2742,101 +2738,77 @@ text-align:center;
 
 .rezerviraj-sobu {
     display: inline-block;
-
     padding: 12px 25px;
-
     background: #0b255c;
     color: white;
-
     text-decoration: none;
-
     border-radius: 8px;
-
     font-size: 14px;
     font-weight: 600;
-
     transition: 0.25s ease;
 }
 
 
-.rezerviraj-sobu:hover {
-    background: #29446f;
-    transform: translateY(-2px);
-}
-
-
 /* ============================= */
-/* STRELICE */
-/* ============================= */
-
-/*.sobe-strelica {
-    position: absolute;
-
-    top: 50%;
-    transform: translateY(-50%);
-
-    width: 40px;
-    height: 40px;
-
-    border: none;
-    border-radius: 50%;
-
-    background: rgba(5, 35, 70, 0.75);
-    color: white;
-
-    font-size: 28px;
-    line-height: 40px;
-
-    cursor: pointer;
-
-    z-index: 10;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: 0.2s ease;
-}
-
-
-.sobe-strelica:hover {
-    background: rgba(5, 35, 70, 0.95);
-    transform: translateY(-50%) scale(1.08);
-}
-
-
-.sobe-lijevo {
-    left: 12px;
-}
-
-
-.sobe-desno {
-    right: 12px;
-} */
-
-
 /* MOBITEL */
+/* ============================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+
+    .sobe-sekcija {
+        width: 100%;
+        padding: 30px 10px 40px;
+        box-sizing: border-box;
+    }
+
+    .sobe-sekcija h2 {
+        font-size: 24px !important;
+        line-height: 1.25;
+        text-align: center;
+        margin-bottom: 25px;
+    }
 
     .sobe-slider {
-        height: 430px;
+        width: 100%;
+        max-width: 100%;
+        height: 380px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .sobe-okvir {
+        width: 100%;
+        height: 100%;
     }
 
     .soba-kartica {
-        padding: 20px;
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        padding: 20px 15px;
+        box-sizing: border-box;
     }
 
     .soba-kartica img {
-        height: 260px;
+        width: 100%;
+        max-width: 300px;
+        height: 200px;
+        object-fit: contain;
+        margin: 0 auto;
     }
 
     .soba-kartica h3 {
         font-size: 20px;
+        line-height: 1.3;
+        margin: 15px 0;
+    }
+
+    .rezerviraj-sobu {
+        padding: 11px 24px;
+        font-size: 14px;
     }
 
 }
-
 /* =========================================================
    KONTAKT - SUCCESS
 ========================================================= */
@@ -5002,4 +4974,34 @@ body {
         border: 0 !important;
     }
 
+}
+/* =========================================================
+   POPRAVAK PRAZNOG PROSTORA - SMJEŠTAJ
+   ========================================================= */
+
+#smjestaji {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-bottom: 40px !important;
+    box-sizing: border-box !important;
+}
+
+#smjestaji .sobe-slider {
+    height: 380px;
+    margin-bottom: 0 !important;
+}
+
+#smjestaji .sobe-okvir {
+    height: 100%;
+}
+
+#smjestaji .scroll-animacija {
+    height: auto !important;
+    min-height: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#smjestaji + * {
+    margin-top: 0 !important;
 }
