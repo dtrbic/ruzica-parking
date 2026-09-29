@@ -1,0 +1,3801 @@
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="author" content="Dorotea Trbić">
+
+<link rel="stylesheet" href="style.css">
+
+<title>Ružica Parking - Siguran i Povoljan Parking Zračna Luka Zagreb</title>
+
+<meta name="description"
+content="Siguran, ograđen i najpovoljniji parking u blizini (3 min) Zračne luke Zagreb. Besplatan transfer do terminala. Rezervirajte svoje mjesto online!">
+
+<meta name="keywords"
+content="airport parking, Parking, Zračna Luka, Parking u blizini zracne luke, zracna luka zagreb, Zagreb parking, Parking airport, parking near Zracna luka, Zračna Luka Franjo Tudman">
+
+<link rel="icon"
+href="slike/parking.webp"
+type="image/png"
+sizes="16x18">
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
+
+<!-- fontovi-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+
+
+<!-- =========================================================
+     SCROLL ANIMACIJA
+========================================================= -->
+
+<style>
+
+.scroll-animacija {
+    opacity: 0;
+    transform: translateY(50px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.scroll-animacija.prikazi {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Kartice se pojavljuju jedna po jedna */
+
+.flip-card.scroll-animacija:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.flip-card.scroll-animacija:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.flip-card.scroll-animacija:nth-child(3) {
+    transition-delay: 0.25s;
+}
+
+.flip-card.scroll-animacija:nth-child(4) {
+    transition-delay: 0.35s;
+}
+
+.flip-card.scroll-animacija:nth-child(5) {
+    transition-delay: 0.45s;
+}
+
+.flip-card.scroll-animacija:nth-child(6) {
+    transition-delay: 0.55s;
+}
+
+
+/* Ako korisnik želi smanjeno kretanje */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .scroll-animacija {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+}
+
+
+/* =========================================================
+   JEZICI - UVIJEK FIKSNO NA VRHU
+========================================================= */
+
+.language-switcher {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    width: max-content;
+
+    z-index: 9999;
+}
+
+.language-switcher a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #ffffff;
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    transition: opacity 0.2s ease;
+}
+
+.language-switcher a:hover {
+    opacity: 0.75;
+}
+
+.language-switcher a.active {
+    opacity: 1;
+}
+
+.language-switcher a img {
+    width: 24px;
+    height: 16px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 2px;
+}
+
+.language-switcher span {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.footer-local__map.mala-karta {
+    width: 700px !important;
+    height: 300px !important;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.footer-local__map.mala-karta iframe {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    border: 0;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     POČETNA
+========================================================= -->
+
+<div id="pocetna">
+</div>
+
+
+<!-- =========================================================
+     JEZICI
+========================================================= -->
+
+<div class="language-switcher">
+
+    <a href="index.html" data-language="hr">
+        <span>HRV</span>
+        <img src="slike/zastava-hr.webp" alt="Hrvatski">
+    </a>
+
+    <span>|</span>
+
+    <a href="index-en.html" data-language="en">
+        <span>ENG</span>
+        <img src="slike/zastava-en.webp" alt="English">
+    </a>
+
+    <span>|</span>
+
+    <a href="index-slo.html" data-language="sl">
+        <span>SLO</span>
+        <img src="slike/zastava-slo.webp" alt="Slovenščina">
+    </a>
+
+</div>
+
+
+<!-- =========================================================
+     FLOATING HEADER
+========================================================= -->
+
+<div class="floating-header">
+
+
+    <a href="#pocetna">
+
+<img src="slike/logo_trans_tamni.webp"
+     class="logo-mobile"
+     alt="Ružica Parking">
+        <img
+            src="slike/logo_trans.webp"
+            class="floating-logo"
+            alt="Ružica Parking Airport">
+
+    </a>
+
+
+    <div class="humburger-menu">
+
+        <input
+            type="checkbox"
+            id="menu-toggle"
+            aria-label="Otvori izbornik">
+
+
+        <div
+            class="humburger-lines"
+            aria-hidden="true">
+
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+
+        </div>
+
+
+        <nav
+            class="humburger-items"
+            aria-label="Mobilni izbornik">
+
+            <a
+                href="index.html#pocetna"
+                class="menu-active"
+               >
+                Početna
+            </a>
+
+            <a
+                href="index.html#rezervacija"
+               >
+                Rezervacija
+            </a>
+
+            <a
+                href="index.html#onama"
+               >
+                O nama
+            </a>
+
+            <a
+                href="index.html#cjenik"
+               >
+                Cjenik
+            </a>
+
+            <a
+                href="index.html#kontakt"
+               >
+                Kontakt
+            </a>
+
+            <a
+                href="index.html#recenzijeG"
+               >
+                Recenzije
+            </a>
+
+            <a
+                href="uvjeti-koristenja.html"
+               >
+                Uvjeti korištenja
+            </a>
+
+            <a
+                href="politika-privatnosti.html"
+               >
+                Politika privatnosti
+            </a>
+
+        </nav>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<div id="navbar">
+
+    <a
+        class="active"
+        href="#pocetna"
+       >
+        Početna
+    </a>
+
+    <a
+        href="#rezervacija"
+       >
+        Rezervacija
+    </a>
+
+    <a
+        href="#cjenik"
+       >
+        Cjenik
+    </a>
+
+    <a
+        href="#kontakt"
+       >
+        Kontakt
+    </a>
+
+    <a
+        href="#onama"
+       >
+        O nama
+    </a>
+
+    <a
+        href="#recenzijeG"
+       >
+        Recenzije
+    </a>
+
+</div>
+
+
+<!-- =========================================================
+     REZERVACIJA
+========================================================= -->
+
+<div id="rezervacija" class="content">
+
+<h2 class="scroll-animacija">REZERVIRAJ PARKING BRZO I JEDNOSTAVNO</h2>
+
+
+    <form
+        id="msform"
+        class="scroll-animacija">
+
+
+        <input
+            type="hidden"
+            name="arrival-date-email"
+            id="arrival-date-email">
+
+        <input
+            type="hidden"
+            name="departure-date-email"
+            id="departure-date-email">
+
+
+        <ul id="progressbar">
+
+            <li
+                class="active"
+               >
+                Parking
+            </li>
+
+            <li>
+                Osobni podaci
+            </li>
+
+            <li>
+                Podaci o letu
+            </li>
+
+            <li>
+                Potvrda
+            </li>
+
+        </ul>
+
+
+        <!-- STEP 1 -->
+
+        <fieldset>
+
+            <h2
+                class="fs-title"
+               >
+                Parking rezervacija
+            </h2>
+
+            <h3
+                class="fs-subtitle"
+               >
+                Vrijeme dolaska i odlaska
+            </h3>
+
+
+            <div class="form-columns">
+
+
+                <div class="form-column">
+
+                    <label for="arrival-date">
+
+                        <span>
+                            Datum dolaska / arrival date
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="arrival-date"
+                        id="arrival-date"
+                        placeholder="Odaberite datum"
+                       
+                        required>
+
+
+                    <label for="arrival-time">
+
+                        <span>
+                            Vrijeme dolaska / arrival time
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <select
+                        name="arrival-time"
+                        id="arrival-time"
+                        required>
+                    </select>
+
+                </div>
+
+
+                <div class="form-column">
+
+                    <label for="departure-date">
+
+                        <span>
+                            Datum odlaska / departure date
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="departure-date"
+                        id="departure-date"
+                        placeholder="Odaberite datum"
+                       
+                        required>
+
+
+                    <label for="departure-time">
+
+                        <span>
+                            Vrijeme odlaska / departure time
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <select
+                        name="departure-time"
+                        id="departure-time"
+                        required>
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div id="price-result"></div>
+
+
+            <input
+                type="hidden"
+                name="total-price"
+                id="total-price-input"
+                value="">
+
+
+            <input
+                type="button"
+                name="next"
+                class="next action-button"
+                value="Sljedeće"
+               >
+
+        </fieldset>
+
+
+        <!-- STEP 2 -->
+
+        <fieldset>
+
+            <h2
+                class="fs-title"
+               >
+                Osobni podaci
+            </h2>
+
+            <h3
+                class="fs-subtitle"
+               >
+                Molimo unesite točne podatke
+            </h3>
+
+
+            <div class="form-columns">
+
+
+                <div class="form-column">
+
+                    <label for="fullname">
+
+                        <span>
+                            Ime i prezime / first and last name
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="fullname"
+                        id="fullname"
+                        required>
+
+
+                    <input
+                        type="hidden"
+                        id="reservation-1name"
+                        name="reservation-1name">
+
+                    <input
+                        type="hidden"
+                        id="reservation-2name"
+                        name="reservation-2name">
+
+
+                    <label for="contact">
+
+                        <span>
+                            Broj mobitela / contact number
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        type="tel"
+                        name="contact"
+                        id="contact"
+                        pattern="^[0-9+\(\)\s\-]+$"
+                        title="Dopušteni su samo brojevi, znakovi +, (, ) i razmaci."
+                        required>
+
+
+                    <label for="email">
+
+                        <span>
+                            Email / your email
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        required>
+
+                </div>
+
+
+                <div class="form-column">
+
+                    <label
+                        for="passengers"
+                       >
+
+                        Broj putnika / number of passengers
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <select
+                        name="passengers"
+                        id="passengers"
+                        required>
+
+                        <option
+                            value=""
+                           >
+                            Odaberite broj putnika
+                        </option>
+
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+
+                    </select>
+
+
+                    <div id="passenger-warning">
+
+                        <span>
+                            Ukoliko je više od 4 putnika,
+                            ljubazno Vas molimo da se javite
+                            na broj +385 98 922 5688,
+                            zbog raspoloživosti vozila.
+                        </span>
+
+                    </div>
+
+
+                    <label for="reg">
+
+                        <span>
+                            Registracijska oznaka / license plate number
+                        </span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="reg"
+                        id="reg">
+
+                </div>
+
+            </div>
+
+
+            <input
+                type="button"
+                name="previous"
+                class="previous action-button"
+                value="Povratak"
+               >
+
+
+            <input
+                type="button"
+                name="next"
+                class="next action-button"
+                value="Sljedeće"
+               >
+
+        </fieldset>
+
+
+        <!-- STEP 3 -->
+
+        <fieldset>
+
+            <h2
+                class="fs-title"
+               >
+                Podaci o letu
+            </h2>
+
+            <h3
+                class="fs-subtitle"
+               >
+                Molimo unesite točne podatke
+            </h3>
+
+
+            <div class="form-columns">
+
+
+                <div class="form-column">
+
+                    <label for="flight">
+
+                        <span>
+                            Broj povratnog leta / return flight number
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="flight"
+                        id="flight"
+                        required>
+
+
+                    <label for="flight-time">
+
+                        <span>
+                            Vrijeme dolaska povratnog leta / return flight arrival
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <select
+                        name="flight-time"
+                        id="flight-time"
+                        required>
+                    </select>
+
+                </div>
+
+
+                <div class="form-column">
+
+                    <label for="airline-name">
+
+                        <span>
+                            Naziv leta (Aviokompanija) / Airline name
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="airline-name"
+                        id="airline-name"
+                        required>
+
+
+                    <label for="flight-name"
+                          >
+
+                        Naziv destinacije / destination name
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        name="flight-name"
+                        id="flight-name">
+
+                </div>
+
+            </div>
+
+
+            <input
+                type="button"
+                name="previous"
+                class="previous action-button"
+                value="Povratak"
+               >
+
+
+            <input
+                type="button"
+                name="next"
+                class="next action-button"
+                value="Sljedeće"
+               >
+
+        </fieldset>
+
+
+        <!-- STEP 4 -->
+
+        <fieldset>
+
+            <h2
+                class="fs-title"
+               >
+                Potvrda
+            </h2>
+
+            <h3
+                class="fs-subtitle"
+               >
+                Pregledajte i potvrdite podatke
+            </h3>
+
+
+            <p>
+
+                Klikom na Potvrdi potvrđujete kreiranu rezervaciju.
+
+            </p>
+
+
+            <div class="privacy-consent">
+
+                <label for="privacy-consent">
+
+                    <input
+                        type="checkbox"
+                        id="privacy-consent"
+                        name="privacy-consent"
+                        required>
+
+                    <span>
+
+                        <span>
+                            Prihvaćam da se moji osobni podaci
+                            koriste u svrhu obrade rezervacije.
+                        </span>
+
+                        <span class="required">*</span>
+
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <input
+                type="button"
+                name="previous"
+                class="previous action-button"
+                value="Povratak"
+               >
+
+
+            <button
+                type="submit"
+                class="submit action-button"
+               >
+
+                Potvrdi
+
+            </button>
+
+        </fieldset>
+
+    </form>
+
+
+    <!-- POTVRDA REZERVACIJE -->
+
+    <div id="confirmation">
+
+        <h2>
+            Vaša rezervacija je uspješno kreirana!
+        </h2>
+
+
+        <div class="success-checkmark">
+
+            <div class="check-icon">
+
+                <svg
+                    class="check-svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+
+                    <polyline
+                        class="check-path"
+                        points="20 6 9 17 4 12">
+                    </polyline>
+
+                </svg>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<p class="scroll-animacija">Poštovani korisnici, ljubazno vas molimo da rezervaciju otkažete najmanje 24 sata prije planiranog leta kako bismo mogli pružiti najbolju uslugu i organizirati kapacitete. Ako želite otkazati rezervaciju, molimo da nas pravovremeno obavijestite putem e-maila ili telefona.
+</p>
+
+<h2 class="scroll-animacija"> KAKO DO NAS?</h2>
+<div class="footer-local__map mala-karta">
+
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.92418849207!2d16.061559592528475!3d45.731392066347574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47667ef19e0d627d%3A0x4a64f5ac2dcf4c5b!2sUl.%20Vladimira%20Nazora%204%2C%2010410%2C%20Velika%20Gorica!5e0!3m2!1shr!2shr!4v1790283553648!5m2!1shr!2shr"
+        width="600"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
+
+</div>
+<br>
+<br>
+</div>
+
+
+<!-- =========================================================
+     O NAMA
+========================================================= -->
+
+<div id="onama" class="content">
+
+    <h2 class="scroll-animacija">
+       Ružica Parking Airport, najbolji izbor za Vas
+    </h2>
+	<p id="moto" class="scroll-animacija">Uštedite na parkingu, potrošite na putovanju!</p>
+<p class="scroll-animacija"> Najpovoljnije privatno parkiralište koje se nalazi samo 3 minute vožnje od Zagrebačke zračne luke. 
+Smješteni smo u neposrednoj blizini stare putničke zgrade i Generalne avijacije, što nas čini idealnim odabirom za sve putnike koji traže ugodan, siguran i povoljan parking.
+Naš cilj je steći ugodno i dugoročno poslovanje,te Vam omogućiti bezbrižno putovanje.
+
+</p>
+
+    <div class="cards-container">
+
+
+        <div class="flip-card scroll-animacija">
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-front">
+
+                    <div class="icon-circle">
+
+                        <svg
+                            class="card-icon"
+                            viewBox="0 0 64 64"
+                            fill="none">
+
+                            <path
+                                d="M14 36L18 22C18.6 19.8 20.6 18 23 18H41C43.4 18 45.4 19.8 46 22L50 36"
+                                stroke="currentColor"
+                                stroke-width="3.5"
+                                stroke-linecap="round"/>
+
+                            <path
+                                d="M11 36H53V43C53 45.2 51.2 47 49 47H15C12.8 47 11 45.2 11 43V36Z"
+                                fill="currentColor"/>
+
+                            <circle
+                                cx="20"
+                                cy="45"
+                                r="4"
+                                fill="#29446f"/>
+
+                            <circle
+                                cx="44"
+                                cy="45"
+                                r="4"
+                                fill="#29446f"/>
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="title"
+                       >
+                        BESPLATAN PRIJEVOZ
+                    </p>
+
+                </div>
+
+
+                <div class="flip-card-back">
+
+                    <p
+                        class="back-text"
+                       >
+
+                        Nudimo vam besplatan prijevoz do i od
+                        Zagrebačke zračne luke.
+                        Naš tim ljubaznih i profesionalnih
+                        zaposlenika osigurat će ugodnu
+                        i domaću atmosferu.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="flip-card scroll-animacija">
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-front">
+
+                    <div class="icon-circle">
+
+                        <svg
+                            class="card-icon"
+                            viewBox="0 0 64 64"
+                            fill="none">
+
+                            <path
+                                d="M32 8L51 15V29C51 41 43 50 32 55C21 50 13 41 13 29V15L32 8Z"
+                                fill="currentColor"/>
+
+                            <path
+                                d="M22 31L28 37L42 23"
+                                stroke="#29446f"
+                                stroke-width="4"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"/>
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="title"
+                       >
+                        SIGURNOST NA PRVOM MJESTU
+                    </p>
+
+                </div>
+
+
+                <div class="flip-card-back">
+
+                    <p
+                        class="back-text"
+                       >
+
+                        Vaše vozilo bit će sigurno jer je naše
+                        parkiralište ograđeno, osvijetljeno
+                        i pod nadzorom 24 sata dnevno,
+                        7 dana u tjednu.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="flip-card scroll-animacija">
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-front">
+
+                    <div class="icon-circle">
+
+                        <svg
+                            class="card-icon"
+                            viewBox="0 0 64 64"
+                            fill="none">
+
+                            <rect
+                                x="10"
+                                y="16"
+                                width="44"
+                                height="32"
+                                rx="5"
+                                fill="currentColor"/>
+
+                            <path
+                                d="M10 26H54"
+                                stroke="#29446f"
+                                stroke-width="3"/>
+
+                            <rect
+                                x="17"
+                                y="33"
+                                width="13"
+                                height="7"
+                                rx="2"
+                                fill="#29446f"/>
+
+                            <circle
+                                cx="44"
+                                cy="36.5"
+                                r="5"
+                                fill="#29446f"/>
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="title"
+                       >
+                        FLEKSIBILNI UVJETI PLAĆANJA
+                    </p>
+
+                </div>
+
+
+                <div class="flip-card-back">
+
+                    <p
+                        class="back-text"
+                       >
+
+                        Prihvaćamo sve vrste kartica,
+                        gotovinsku naplatu,
+                        kao i izdavanje R1 računa.
+                        Naplata se vrši prilikom odlaska
+                        sa parkirališta.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="flip-card scroll-animacija">
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-front">
+
+                    <div class="icon-circle">
+
+                        <svg
+                            class="card-icon"
+                            viewBox="0 0 64 64"
+                            fill="none">
+
+                            <circle
+                                cx="32"
+                                cy="32"
+                                r="21"
+                                stroke="currentColor"
+                                stroke-width="5"/>
+
+                            <path
+                                d="M22 32L29 39L43 24"
+                                stroke="currentColor"
+                                stroke-width="5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"/>
+
+                            <path
+                                d="M43 16C48 20 51 25 52 31"
+                                stroke="currentColor"
+                                stroke-width="4"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="title"
+                       >
+                        JEDNOSTAVAN PROCES
+                    </p>
+
+                </div>
+
+
+                <div class="flip-card-back">
+
+                    <p
+                        class="back-text"
+                       >
+
+                        Naš tim osigurava da proces dolaska,
+                        parkiranja, ukrcaja prtljage
+                        i plaćanja bude brz i bez stresa.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="flip-card scroll-animacija">
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-front">
+
+                    <div class="icon-circle">
+
+                        <svg
+                            class="card-icon"
+                            viewBox="0 0 64 64"
+                            fill="none">
+
+                            <path
+                                d="M12 27L27 25L38 12L43 14L38 25L53 28L55 32L38 32L31 51L26 49L29 32L12 31L9 29L12 27Z"
+                                fill="currentColor"/>
+
+                            <path
+                                d="M25 55H39"
+                                stroke="currentColor"
+                                stroke-width="3"/>
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="title"
+                       >
+                        BRZI PRIJEVOZ PO DOLASKU
+                    </p>
+
+                </div>
+
+
+                <div class="flip-card-back">
+
+                    <p
+                        class="back-text"
+                       >
+
+                        Nakon slijetanja na Zračnu luku
+                        i preuzimanja prtljage,
+                        molimo vas da nas kontaktirate
+                        kako bismo na vrijeme došli po vas.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="flip-card scroll-animacija">
+
+            <div class="flip-card-inner">
+
+                <div class="flip-card-front">
+
+                    <div class="icon-circle">
+
+                        <svg
+                            class="card-icon"
+                            viewBox="0 0 64 64"
+                            fill="none">
+
+                            <rect
+                                x="9"
+                                y="13"
+                                width="46"
+                                height="39"
+                                rx="5"
+                                fill="currentColor"/>
+
+                            <path
+                                d="M9 25H55"
+                                stroke="#29446f"
+                                stroke-width="3"/>
+
+                            <path
+                                d="M20 8V18M44 8V18"
+                                stroke="currentColor"
+                                stroke-width="5"
+                                stroke-linecap="round"/>
+
+                            <circle
+                                cx="44"
+                                cy="43"
+                                r="10"
+                                fill="#29446f"
+                                stroke="currentColor"
+                                stroke-width="3"/>
+
+                            <path
+                                d="M44 37V43L48 46"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                                stroke-linecap="round"/>
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="title"
+                       >
+                        REZERVIRAJTE UNAPRIJED
+                    </p>
+
+                </div>
+
+
+                <div class="flip-card-back">
+
+                    <p
+                        class="back-text"
+                       >
+
+                        Osigurajte svoje parkirno mjesto
+                        na našem parkiralištu
+                        i budite sigurni da vas čeka
+                        slobodno mjesto kad stignete.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+<h2 class="scroll-animacija">GALERIJA</h2>
+
+<div class="slider-kontejner">
+
+  <div class="slike-okvir">
+    <img src="slike/1.webp" alt="Slika 1">
+    <img src="slike/2.webp" alt="Slika 2">
+    <img src="slike/3.webp" alt="Slika 3">
+    <img src="slike/4.webp" alt="Slika 4">
+
+  <img src="slike/6.webp" alt="Slika 6">
+  <img src="slike/7.webp" alt="Slika 7">
+  <img src="slike/8.webp" alt="Slika 8">
+  <img src="slike/9.webp" alt="Slika 9">
+
+ 
+  </div>
+
+  <button class="slider-strelica slider-lijevo" onclick="prethodnaSlika()">‹</button>
+  <button class="slider-strelica slider-desno" onclick="sljedecaSlika()">›</button>
+
+</div>
+
+<button id="gumbGalerija" class="prikazi-sve" onclick="prikaziSveSlike()">
+  Prikaži sve slike
+</button>
+
+<div id="galerija" class="galerija">
+
+  <button class="zatvori-galeriju" onclick="zatvoriGaleriju()">×</button>
+
+  <div class="galerija-slike">
+    <img src="slike/1.webp" alt="Slika 1">
+    <img src="slike/2.webp" alt="Slika 2">
+    <img src="slike/3.webp" alt="Slika 3">
+    <img src="slike/4.webp" alt="Slika 4">
+	 <img src="slike/6.webp" alt="Slika 6">
+  <img src="slike/7.webp" alt="Slika 7">
+  <img src="slike/8.webp" alt="Slika 8">
+  <img src="slike/9.webp" alt="Slika 9">
+
+ 
+	
+  </div>
+
+</div>
+	
+</div>
+
+
+<!-- =========================================================
+     CJENIK
+========================================================= -->
+
+<div id="cjenik" class="content">
+
+    <h2 class="scroll-animacija">
+        Cjenik
+    </h2>
+
+
+    <div class="tablica-premotaj scroll-animacija">
+
+        <table class="cjenik-tablica display">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        DAN
+                    </th>
+
+                    <th>
+                        VAŽEĆA CIJENA
+                    </th>
+
+                    <th>
+                        <span>
+                            SIDRENA CIJENA
+                        </span>
+                        <br>
+                        10.09.2026.
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr><td>1</td><td>10 €</td><td>10 €</td></tr>
+                <tr><td>2</td><td>15 €</td><td>15 €</td></tr>
+                <tr><td>3</td><td>20 €</td><td>20 €</td></tr>
+                <tr><td>4</td><td>25 €</td><td>25 €</td></tr>
+                <tr><td>5</td><td>30 €</td><td>30 €</td></tr>
+                <tr><td>6</td><td>35 €</td><td>35 €</td></tr>
+                <tr><td>7</td><td>40 €</td><td>40 €</td></tr>
+                <tr><td>8</td><td>45 €</td><td>45 €</td></tr>
+                <tr><td>9</td><td>50 €</td><td>50 €</td></tr>
+                <tr><td>10</td><td>55 €</td><td>55 €</td></tr>
+                <tr><td>11</td><td>59 €</td><td>59 €</td></tr>
+                <tr><td>12</td><td>63 €</td><td>63 €</td></tr>
+                <tr><td>13</td><td>67 €</td><td>67 €</td></tr>
+                <tr><td>14</td><td>71 €</td><td>71 €</td></tr>
+                <tr><td>15</td><td>75 €</td><td>75 €</td></tr>
+                <tr><td>16</td><td>79 €</td><td>79 €</td></tr>
+                <tr><td>17</td><td>83 €</td><td>83 €</td></tr>
+                <tr><td>18</td><td>87 €</td><td>87 €</td></tr>
+                <tr><td>19</td><td>91 €</td><td>91 €</td></tr>
+                <tr><td>20</td><td>95 €</td><td>95 €</td></tr>
+                <tr><td>21</td><td>99 €</td><td>99 €</td></tr>
+                <tr><td>22</td><td>103 €</td><td>103 €</td></tr>
+                <tr><td>23</td><td>107 €</td><td>107 €</td></tr>
+                <tr><td>24</td><td>111 €</td><td>111 €</td></tr>
+                <tr><td>25</td><td>115 €</td><td>115 €</td></tr>
+                <tr><td>26</td><td>119 €</td><td>119 €</td></tr>
+                <tr><td>27</td><td>123 €</td><td>123 €</td></tr>
+                <tr><td>28</td><td>127 €</td><td>127 €</td></tr>
+                <tr><td>29</td><td>131 €</td><td>131 €</td></tr>
+                <tr><td>30</td><td>135 €</td><td>135 €</td></tr>
+                <tr><td>31</td><td>139 €</td><td>139 €</td></tr>
+
+            </tbody>
+
+        </table>
+<br>
+
+        <div
+            class="cjenik-napomena scroll-animacija"
+           >
+			<strong style="font-size:20px;">
+            MJESEČNI NAJAM PARKINGA ZA RADNIKE
+            PREMA DOGOVORU
+			</strong>
+        </div>
+		
+
+<br>
+        <div class="cjenik-info scroll-animacija">
+
+            <p  class="cjTekstinfo">
+              
+                    RUŽICA PARKING AIRPORT j.d.o.o.
+                
+            </p>
+            <p class="cjTekstinfo">
+                
+                    TEL:
+                +385 98 922 5688
+
+            </p>
+
+        </div>
+</div>
+
+        <div class="cjenik-gumbi scroll-animacija">
+
+            <a  
+                href="slike/cjenik_plavi.pdf"
+                class="cjenik-download"
+				target="_blank"
+                download
+               >
+
+                Cjenik u PDF formatu
+
+            </a>
+
+
+            <a  
+                href="slike/cjenik.xlsx"
+                class="cjenik-download"
+                download
+               >
+
+                Cjenik u Excel formatu
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     KONTAKT
+========================================================= -->
+
+<div id="kontakt" class="content">
+
+    <h2 class="scroll-animacija">
+        KONTAKTIRAJTE NAS ILI NAM POŠALJITE UPIT
+    </h2>
+
+<p class="scroll-animacija" style="color:#10306b">Imate pitanje, trebate dodatne informacije ili želite poslati upit? Slobodno nam se obratite. <br>Naš tim rado će vam pomoći i odgovoriti u najkraćem mogućem roku.</p>
+    <section class="contact-section">
+
+
+        <div class="contact-wrapper">
+
+
+            <form
+                id="contact-form"
+                class="scroll-animacija">
+
+
+                <h2
+                    class="fs-title"
+                   >
+                    KONTAKTIRAJTE NAS
+                </h2>
+
+
+                <div class="contact-columns">
+
+
+                    <div class="contact-column">
+
+
+                        <label for="contact-name">
+
+                            <span>
+                                Ime i prezime
+                            </span>
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="contact-name"
+                            name="contact-name"
+                            required>
+
+
+                        <input
+                            type="hidden"
+                            id="contact-1name"
+                            name="contact-1name">
+
+
+                        <input
+                            type="hidden"
+                            id="contact-2name"
+                            name="contact-2name">
+
+
+                        <label for="contact-phone">
+
+                            <span>
+                                Telefon
+                            </span>
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input
+                            type="tel"
+                            id="contact-phone"
+                            name="contact-phone"
+                            autocomplete="tel"
+                            pattern="^[0-9+\(\)\s\-]+$"
+                            maxlength="20"
+                            title="Dopušteni su samo brojevi, znakovi +, ), (, razmak i -."
+                            required>
+
+                    </div>
+
+
+                    <div class="contact-column">
+
+
+                        <label for="contact-email">
+
+                            <span>
+                                E-mail
+                            </span>
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="contact-email"
+                            name="email"
+                            autocomplete="email"
+                            required>
+
+
+                        <label for="contact-message">
+
+                            <span>
+                                Poruka
+                            </span>
+
+                            <span>*</span>
+
+                        </label>
+
+
+                        <textarea
+                            id="contact-message"
+                            name="contact-message"
+                            rows="5"
+                            required></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="contact-button"
+                   >
+
+                    POŠALJI
+
+                </button>
+
+            </form>
+
+
+            <div
+                id="contact-success"
+                class="contact-success">
+
+                <div class="contact-success-checkmark">
+
+                    <div class="contact-check-icon">
+
+                        <svg
+                            class="contact-check-svg"
+                            viewBox="0 0 52 52"
+                            fill="none">
+
+                            <path
+                                class="contact-check-path"
+                                d="M14 27 L22 35 L39 17"
+                                stroke="white"
+                                stroke-width="5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+                            </path>
+
+                        </svg>
+
+                    </div>
+
+                </div>
+
+
+                <h3>
+                    VAŠA PORUKA JE USPJEŠNO POSLANA!
+                </h3>
+
+            </div>
+
+
+            <div class="contact-info scroll-animacija">
+
+
+                <p style="font-size:20px;" class="kontaktTekst">
+
+                    <strong>
+                        RUŽICA PARKING AIRPORT
+                    </strong>
+
+                </p>
+
+
+                <p class="kontaktTekst">
+
+                    Vladimira Nazora 4<br>
+                    Velika Gorica,10410
+
+                </p>
+
+
+                <p class="kontaktTekst">
+
+                    <strong>
+                        Telefon:
+                    </strong>
+
+                    <br>
+
+                    <a href="tel:+385989225688">
+                        +385 98 922 5688
+                    </a>
+
+                </p>
+
+
+                <p class="kontaktTekst">
+
+                    <strong>
+                        E-mail:
+                    </strong>
+
+                    <br>
+
+                    <a href="mailto:ruzicaparking@gmail.com">
+                        ruzicaparking@gmail.com
+                    </a>
+
+                </p>
+
+
+                <h3>
+                    RADNO VRIJEME
+                </h3>
+
+
+                <ul class="contact-hours">
+
+                    <li>
+
+                        <span>
+                            Pon - Ned: 0 - 24
+                        </span>
+
+                    </li>
+
+                </ul>
+
+
+                <nav
+                    class="rounded-social-buttons contact-social"
+                    aria-label="Društvene mreže">
+
+
+                    <a
+                        class="social-button facebook"
+                        href="https://www.facebook.com/ruzicaparking/?locale=hr_HR"
+                        aria-label="Facebook"
+                        target="_blank">
+
+                        <i class="fab fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <a
+                        class="social-button instagram"
+                        href="https://www.instagram.com/ruzicaparking/"
+                        aria-label="Instagram"
+                        target="_blank">
+
+                        <i class="fab fa-instagram"></i>
+
+                    </a>
+
+
+                    <a
+                        class="social-button whatsapp"
+                        href="https://wa.me/385989225688"
+                        aria-label="WhatsApp"
+                        target="_blank">
+
+                        <i class="fab fa-whatsapp"></i>
+
+                    </a>
+
+
+                    <a
+                        class="social-button phone"
+                        href="tel:+385989225688"
+                        aria-label="Telefon">
+
+                        <i class="fas fa-phone"></i>
+
+                    </a>
+
+                </nav>
+
+            </div>
+
+        </div>
+
+
+
+    </section>
+	
+	
+	<!-- =========================================================
+     RECENZIJE
+========================================================= -->
+
+<div
+    id="recenzijeG"
+    class="content">
+
+
+    <h2 class="scroll-animacija">
+        Zadovoljstvo naših klijenata
+    </h2>
+<p>Vaše zadovoljstvo naš je najveći uspjeh.<br>
+Iskustva naših klijenata najbolje govore o našoj usluzi i povjerenju koje gradimo <br>
+Hvala vam na povjerenju!</p>
+
+    
+<div class="recenzije scroll-animacija">
+       <script defer async src='https://cdn.trustindex.io/loader.js?a1a295c82187381ff20638b9b18'></script>
+
+    </div>
+
+</div>
+	
+	
+<!-- SMJEŠTAJI -->
+<section id="smjestaji" class="sobe-sekcija">
+
+    <h2 style="font-size:30px;" class="scroll-animacija">SMJEŠTAJ U BLIZINI NAS</h2>
+<div class="scroll-animacija">
+    <div class="sobe-slider">
+
+        <div class="sobe-okvir">
+
+            <!-- SMJEŠTAJ 1 -->
+            <div class="soba-kartica">
+                <img src="slike/terminal.webp" alt="Smještaj 1">
+
+                <h3>Terminal rooms</h3>
+
+                <a href="https://terminalcaffebarandrooms.com/rooms" target= "blank" class="rezerviraj-sobu">
+                    REZERVIRAJ
+                </a>
+            </div>
+
+            <!-- SMJEŠTAJ 2 -->
+            <div class="soba-kartica">
+                <img src="slike/smjestaj2.webp" alt="Smještaj 2">
+
+                <h3>Smještaj 2</h3>
+
+                <a href="smjestaj2.html" class="rezerviraj-sobu">
+                    REZERVIRAJ
+                </a>
+            </div>
+
+            <!-- SMJEŠTAJ 3 -->
+            <div class="soba-kartica">
+                <img src="slike/smjestaj3.webp" alt="Smještaj 3">
+
+                <h3>Smještaj 3</h3>
+
+                <a href="smjestaj3.html" class="rezerviraj-sobu">
+                    REZERVIRAJ
+                </a>
+            </div>
+
+        </div>
+
+        <!-- STRELICA LIJEVO -->
+        <button
+            class="sobe-strelica sobe-lijevo"
+            onclick="prethodnaSoba()">
+            ‹
+        </button>
+
+        <!-- STRELICA DESNO -->
+        <button
+            class="sobe-strelica sobe-desno"
+            onclick="sljedecaSoba()">
+            ›
+        </button>
+
+    </div>
+</div>
+</section>
+
+</div>
+
+
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer
+    class="footer-local"
+    role="contentinfo">
+
+
+    <div class="container">
+
+
+        <div class="footer-local__main">
+
+
+            <div class="footer-local__details">
+
+
+                <ul class="footer-local__hours-list">
+
+
+                    <li>
+
+                        <span>
+
+                            <strong>
+                                RUŽICA PARKING AIRPORT j.d.o.o.
+                            </strong>
+
+                        </span>
+
+                    </li>
+
+
+                    <li>
+
+                        <span>
+
+                            <strong>
+                                OIB:
+                            </strong>
+
+                            85784364990
+
+                        </span>
+
+                    </li>
+
+
+                    <br>
+
+
+                    <li>
+                        <span>
+                            Vladimira Nazora 4
+                        </span>
+                    </li>
+
+
+                    <li>
+                        <span>
+                            Velika Gorica, 10410
+                        </span>
+                    </li>
+
+
+                    <li>
+
+                        <strong>
+                            Telefon:
+                        </strong>
+
+                        <a href="tel:+385989225688">
+                            +385 98 922 5688
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <strong>
+                            Email:
+                        </strong>
+
+                        <a href="mailto:ruzicaparking@gmail.com">
+                            ruzicaparking@gmail.com
+                        </a>
+
+                    </li>
+
+
+                    <li>
+
+                        <span>
+
+                            <strong>
+                                RADNO VRIJEME:
+                            </strong>
+
+                        </span>
+
+                        <span>
+                            Pon - Ned:
+                        </span>
+
+                        <span>
+                            0 - 24
+                        </span>
+
+                    </li>
+
+
+                </ul>
+
+            </div>
+
+
+            <div class="footer-local__map">
+
+
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.92418849207!2d16.061559592528475!3d45.731392066347574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47667ef19e0d627d%3A0x4a64f5ac2dcf4c5b!2sUl.%20Vladimira%20Nazora%204%2C%2010410%2C%20Velika%20Gorica!5e0!3m2!1shr!2shr!4v1790283553648!5m2!1shr!2shr"
+                    width="600"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="strict-origin-when-cross-origin">
+                </iframe>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-local__bottom">
+<img
+            src="slike/logo_trans.webp"
+            class="logo"
+            alt="Ružica Parking Airport" >
+			
+
+            <div class="footer-local__copyright">
+
+                © 2025 Ružica Parking Airport
+
+                <span class="footer-separator">
+                    |
+                </span>
+
+                <span>
+                    Sva prava pridržana
+                </span>
+
+                <span class="footer-separator">
+                    |
+                </span>
+
+                <a
+                    href="uvjeti-koristenja.html"
+                   >
+                    Uvjeti korištenja
+                </a>
+
+                <span class="footer-separator">
+                    |
+                </span>
+
+                <a
+                    href="politika-privatnosti.html"
+                   >
+                    Politika privatnosti
+                </a>
+
+            </div>
+
+
+            <nav
+                class="rounded-social-buttons"
+                aria-label="Društvene mreže i kontakt">
+
+
+                <a
+                    class="social-button facebook"
+                    href="https://www.facebook.com/ruzicaparking/?locale=hr_HR"
+                    aria-label="Facebook"
+                    target="_blank">
+
+                    <i class="fab fa-facebook-f"></i>
+
+                </a>
+
+
+                <a
+                    class="social-button instagram"
+                    href="https://www.instagram.com/ruzicaparking/"
+                    aria-label="Instagram"
+                    target="_blank">
+
+                    <i class="fab fa-instagram"></i>
+
+                </a>
+
+
+                <a
+                    class="social-button whatsapp"
+                    href="https://wa.me/385989225688"
+                    aria-label="WhatsApp"
+                    target="_blank">
+
+                    <i class="fab fa-whatsapp"></i>
+
+                </a>
+
+
+                <a
+                    class="social-button phone"
+                    href="tel:+385989225688"
+                    aria-label="Telefon">
+
+                    <i class="fas fa-phone"></i>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT / LIBRARIES
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+
+
+<script>
+
+/* =========================================================
+   EMAILJS
+========================================================= */
+
+emailjs.init({
+    publicKey: "RkbOUI9RdzQzRvTFL"
+});
+
+
+/* =========================================================
+   SPLIT NAME
+========================================================= */
+
+function splitName(sourceId, firstNameId, lastNameId) {
+
+    const input =
+        document.getElementById(sourceId);
+
+    const firstName =
+        document.getElementById(firstNameId);
+
+    const lastName =
+        document.getElementById(lastNameId);
+
+    if (!input || !firstName || !lastName) {
+        return;
+    }
+
+    const parts =
+        input.value.trim().split(/\s+/);
+
+    firstName.value =
+        parts[0] || "";
+
+    lastName.value =
+        parts.slice(1).join(" ") || "";
+}
+
+
+document
+    .getElementById("contact-name")
+    .addEventListener(
+        "input",
+        function() {
+
+            splitName(
+                "contact-name",
+                "contact-1name",
+                "contact-2name"
+            );
+
+        }
+    );
+
+
+document
+    .getElementById("fullname")
+    .addEventListener(
+        "input",
+        function() {
+
+            splitName(
+                "fullname",
+                "reservation-1name",
+                "reservation-2name"
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   GENERIRANJE VREMENA
+========================================================= */
+
+function generateTimes(selectId) {
+
+    const select =
+        document.getElementById(selectId);
+
+    for (let h = 0; h < 24; h++) {
+
+        for (let m = 0; m < 60; m += 15) {
+
+            const hour =
+                h.toString().padStart(2, "0");
+
+            const min =
+                m.toString().padStart(2, "0");
+
+            const time =
+                `${hour}:${min}`;
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                time;
+
+            option.textContent =
+                time;
+
+            select.appendChild(option);
+        }
+    }
+}
+
+
+generateTimes("arrival-time");
+generateTimes("departure-time");
+generateTimes("flight-time");
+
+
+document
+    .getElementById("departure-time")
+    .selectedIndex = -1;
+
+document
+    .getElementById("arrival-time")
+    .selectedIndex = -1;
+
+document
+    .getElementById("flight-time")
+    .selectedIndex = -1;
+
+
+/* =========================================================
+   FLATPICKR
+========================================================= */
+
+const arrivalPicker =
+    flatpickr("#arrival-date", {
+
+        dateFormat: "Y-m-d",
+
+        altInput: true,
+
+        altFormat: "d.m.Y",
+
+        minDate: "today",
+
+        locale: {
+            firstDayOfWeek: 1
+        },
+
+        onChange: function(selectedDates) {
+
+            if (selectedDates.length > 0) {
+
+                departurePicker.set(
+                    "minDate",
+                    selectedDates[0]
+                );
+
+                arrivalPicker
+                    .altInput
+                    .classList
+                    .remove("required-error");
+            }
+
+            calculatePrice();
+        }
+
+    });
+
+
+const departurePicker =
+    flatpickr("#departure-date", {
+
+        dateFormat: "Y-m-d",
+
+        altInput: true,
+
+        altFormat: "d.m.Y",
+
+        minDate: "today",
+
+        locale: {
+            firstDayOfWeek: 1
+        },
+
+        onChange: function(selectedDates) {
+
+            if (selectedDates.length > 0) {
+
+                departurePicker
+                    .altInput
+                    .classList
+                    .remove("required-error");
+            }
+
+            calculatePrice();
+        }
+
+    });
+
+
+/* =========================================================
+   RAČUNANJE CIJENE
+========================================================= */
+
+function calculatePrice() {
+
+    const priceResult =
+        document.getElementById("price-result");
+
+    const arrivalDate =
+        document.getElementById("arrival-date").value;
+
+    const arrivalTime =
+        document.getElementById("arrival-time").value;
+
+    const departureDate =
+        document.getElementById("departure-date").value;
+
+    const departureTime =
+        document.getElementById("departure-time").value;
+
+
+    if (!departureTime) {
+
+        priceResult.textContent = "";
+
+        priceResult.classList.remove("active");
+
+        return;
+    }
+
+
+    if (!arrivalDate || !arrivalTime || !departureDate) {
+
+        priceResult.textContent = "";
+
+        priceResult.classList.remove("active");
+
+        return;
+    }
+
+
+    const arrival =
+        new Date(
+            `${arrivalDate}T${arrivalTime}:00`
+        );
+
+    const departure =
+        new Date(
+            `${departureDate}T${departureTime}:00`
+        );
+
+
+    if (departure <= arrival) {
+
+        priceResult.textContent =
+            "Datum odlaska mora biti nakon dolaska!";
+
+        priceResult.classList.add("active");
+
+        return;
+    }
+
+
+    const diffMs =
+        departure - arrival;
+
+    let days =
+        Math.ceil(
+            diffMs /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    let price = 0;
+
+
+    if (days >= 1) {
+
+        price = 10;
+
+
+        if (days > 1 && days <= 10) {
+
+            price +=
+                (days - 1) * 5;
+
+        }
+
+        else if (days > 10 && days <= 31) {
+
+            price +=
+                9 * 5;
+
+            price +=
+                (days - 10) * 4;
+
+        }
+
+        else if (days > 31) {
+
+            price +=
+                9 * 5;
+
+            price +=
+                21 * 4;
+
+            price +=
+                (days - 31) * 3;
+        }
+    }
+
+
+    priceResult.textContent =
+        `Ukupno: ${days} dan(a) → ${price} €`;
+
+    priceResult.classList.add("active");
+
+
+    document
+        .getElementById("total-price-input")
+        .value =
+        `${price} € (${days} dana)`;
+}
+
+
+function updateEmailDates() {
+
+    const arrivalDate =
+        document.getElementById("arrival-date").value;
+
+    const departureDate =
+        document.getElementById("departure-date").value;
+
+
+    if (arrivalDate) {
+
+        const parts =
+            arrivalDate.split("-");
+
+        document
+            .getElementById("arrival-date-email")
+            .value =
+            `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+
+
+    if (departureDate) {
+
+        const parts =
+            departureDate.split("-");
+
+        document
+            .getElementById("departure-date-email")
+            .value =
+            `${parts[2]}-${parts[1]}-${parts[0]}`;
+    }
+}
+
+
+document
+    .getElementById("departure-time")
+    .addEventListener(
+        "change",
+        calculatePrice
+    );
+
+
+/* =========================================================
+   NEXT / PREVIOUS
+========================================================= */
+
+var current_fs,
+    next_fs,
+    previous_fs;
+
+var left,
+    opacity,
+    scale;
+
+var animating;
+
+
+$(".next").click(function() {
+
+    let valid = true;
+
+    const currentFieldset =
+        $(this).closest("fieldset");
+
+
+    currentFieldset
+        .find(
+            "input[required], select[required], textarea[required]"
+        )
+        .each(function() {
+
+            if (!this.value.trim()) {
+
+                this.classList.add(
+                    "required-error"
+                );
+
+                valid = false;
+
+            } else {
+
+                this.classList.remove(
+                    "required-error"
+                );
+            }
+
+        });
+
+
+    if (
+        currentFieldset
+            .find("#arrival-date")
+            .length
+    ) {
+
+        const arrivalDate =
+            document.getElementById(
+                "arrival-date"
+            );
+
+
+        if (!arrivalDate.value) {
+
+            arrivalPicker
+                .altInput
+                .classList
+                .add("required-error");
+
+            valid = false;
+
+        } else {
+
+            arrivalPicker
+                .altInput
+                .classList
+                .remove("required-error");
+        }
+
+
+        const departureDate =
+            document.getElementById(
+                "departure-date"
+            );
+
+
+        if (!departureDate.value) {
+
+            departurePicker
+                .altInput
+                .classList
+                .add("required-error");
+
+            valid = false;
+
+        } else {
+
+            departurePicker
+                .altInput
+                .classList
+                .remove("required-error");
+        }
+
+    }
+
+
+    if (!valid) {
+        return false;
+    }
+
+
+    if (animating) {
+        return false;
+    }
+
+
+    animating = true;
+
+
+    current_fs =
+        $(this).closest("fieldset");
+
+
+    next_fs =
+        current_fs.next("fieldset");
+
+
+    $("#progressbar li")
+        .eq(
+            $("fieldset").index(next_fs)
+        )
+        .addClass("active");
+
+
+    next_fs.show();
+
+
+    current_fs.animate(
+
+        {
+            opacity: 0
+        },
+
+        {
+
+            step: function(now, mx) {
+
+                scale =
+                    1 -
+                    (1 - now) * 0.2;
+
+                left =
+                    (now * 50) + "%";
+
+                opacity =
+                    1 - now;
+
+
+                current_fs.css({
+
+                    transform:
+                        "scale(" +
+                        scale +
+                        ")",
+
+                    position:
+                        "absolute"
+                });
+
+
+                next_fs.css({
+
+                    left:
+                        left,
+
+                    opacity:
+                        opacity
+                });
+
+            },
+
+
+            duration: 800,
+
+
+            complete: function() {
+
+                current_fs.hide();
+
+                animating = false;
+            },
+
+
+            easing:
+                "easeInOutBack"
+
+        }
+
+    );
+
+});
+
+
+$("#msform").on(
+    "input change",
+    "input[required], select[required], textarea[required]",
+    function() {
+
+        if (this.value) {
+
+            this.classList.remove(
+                "required-error"
+            );
+        }
+
+
+        if (this.id === "contact") {
+
+            this.value =
+                this.value.replace(
+                    /[^0-9+\(\)\s\-]/g,
+                    ''
+                );
+        }
+
+    }
+);
+
+
+$(".previous").click(function() {
+
+    if (animating) {
+        return false;
+    }
+
+
+    animating = true;
+
+
+    current_fs =
+        $(this).closest("fieldset");
+
+
+    previous_fs =
+        current_fs.prev("fieldset");
+
+
+    $("#progressbar li")
+        .eq(
+            $("fieldset").index(current_fs)
+        )
+        .removeClass("active");
+
+
+    previous_fs.show();
+
+
+    current_fs.animate(
+
+        {
+            opacity: 0
+        },
+
+        {
+
+            step: function(now, mx) {
+
+                scale =
+                    0.8 +
+                    (1 - now) * 0.2;
+
+                left =
+                    ((1 - now) * 50) +
+                    "%";
+
+                opacity =
+                    1 - now;
+
+
+                current_fs.css({
+                    left: left
+                });
+
+
+                previous_fs.css({
+
+                    transform:
+                        "scale(" +
+                        scale +
+                        ")",
+
+                    opacity:
+                        opacity
+                });
+
+            },
+
+
+            duration: 800,
+
+
+            complete: function() {
+
+                current_fs.hide();
+
+                animating = false;
+            },
+
+
+            easing:
+                "easeInOutBack"
+
+        }
+
+    );
+
+});
+
+
+/* =========================================================
+   REZERVACIJA - SUBMIT
+========================================================= */
+
+document
+    .getElementById("msform")
+    .addEventListener(
+        "submit",
+        function(e) {
+
+            e.preventDefault();
+
+
+            const form = this;
+
+
+            const consent =
+                document.getElementById(
+                    "privacy-consent"
+                );
+
+
+            if (!consent.checked) {
+
+                consent.classList.add(
+                    "required-error"
+                );
+
+
+                consent.scrollIntoView({
+
+                    behavior:
+                        "smooth",
+
+                    block:
+                        "center"
+                });
+
+
+                return;
+            }
+
+
+            if (!form.checkValidity()) {
+
+                form.reportValidity();
+
+                return;
+            }
+
+
+            if (
+                form.dataset.sending === "true"
+            ) {
+
+                return;
+            }
+
+
+            form.dataset.sending =
+                "true";
+
+
+            const submitButton =
+                form.querySelector(
+                    'button[type="submit"], input[type="submit"]'
+                );
+
+
+            if (submitButton) {
+
+                submitButton.disabled =
+                    true;
+            }
+
+
+            updateEmailDates();
+
+
+            emailjs.sendForm(
+
+                "service_tsbzna5",
+
+                "template_xwvllzo",
+
+                form
+
+            )
+
+            .then(function(response) {
+
+                console.log(
+                    "Rezervacija uspješno poslana!",
+                    response.status,
+                    response.text
+                );
+
+
+                form.style.display =
+                    "none";
+
+
+                document
+                    .getElementById(
+                        "confirmation"
+                    )
+                    .style.display =
+                    "block";
+
+            })
+
+
+            .catch(function(error) {
+
+                console.error(
+                    "Greška kod slanja rezervacije:",
+                    error
+                );
+
+
+                form.dataset.sending =
+                    "false";
+
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        false;
+                }
+
+
+                alert(
+                    "Došlo je do greške kod slanja rezervacije. " +
+                    "Molimo pokušajte ponovno."
+                );
+
+            });
+
+        }
+    );
+
+
+/* =========================================================
+   GLATKO POMICANJE NAVBARA
+========================================================= */
+
+const navLinks =
+    document.querySelectorAll("nav a");
+
+
+navLinks.forEach(function(link) {
+
+    link.addEventListener(
+        "click",
+        function(e) {
+
+            const target =
+                document.querySelector(
+                    this.getAttribute("href")
+                );
+
+
+            if (!target) {
+                return;
+            }
+
+
+            e.preventDefault();
+
+
+            target.scrollIntoView({
+
+                behavior:
+                    "smooth",
+
+                block:
+                    "start"
+            });
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   BROJ PUTNIKA
+========================================================= */
+
+document
+    .getElementById("passengers")
+    .addEventListener(
+        "change",
+        function() {
+
+            const warning =
+                document.getElementById(
+                    "passenger-warning"
+                );
+
+
+            if (Number(this.value) > 4) {
+
+                warning.style.display =
+                    "block";
+
+            } else {
+
+                warning.style.display =
+                    "none";
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   KONTAKT FORMA
+========================================================= */
+
+document
+    .getElementById(
+        "contact-form"
+    )
+    .addEventListener(
+        "submit",
+        function(e) {
+
+            e.preventDefault();
+
+
+            const form = this;
+
+
+            // Provjera forme
+
+            if (!form.checkValidity()) {
+
+                form
+                    .querySelectorAll(
+                        "input[required], textarea[required]"
+                    )
+                    .forEach(function(field) {
+
+                        if (!field.value.trim()) {
+
+                            field.classList.add(
+                                "required-error"
+                            );
+
+                        } else {
+
+                            field.classList.remove(
+                                "required-error"
+                            );
+
+                        }
+
+                    });
+
+
+                return;
+            }
+
+
+            // SADA JE SVE ISPRAVNO → ZAKLJUČAJ SLANJE
+
+            if (
+                form.dataset.sending === "true"
+            ) {
+
+                return;
+            }
+
+
+            form.dataset.sending =
+                "true";
+
+
+            const submitButton =
+                form.querySelector(
+                    'button[type="submit"], input[type="submit"]'
+                );
+
+
+            if (submitButton) {
+
+                submitButton.disabled =
+                    true;
+
+            }
+
+
+            // EMAILJS
+
+            emailjs.sendForm(
+
+                "service_tsbzna5",
+
+                "template_93kv61s",
+
+                form
+
+            )
+
+            .then(function(response) {
+
+                console.log(
+
+                    "Kontakt poruka uspješno poslana!",
+
+                    response.status,
+
+                    response.text
+
+                );
+
+
+                // Sakrij kontakt formu
+
+                form.style.display =
+                    "none";
+
+
+                // Prikaži tvoju postojeću poruku
+
+                const success =
+                    document.getElementById(
+                        "contact-success"
+                    );
+
+
+                success.style.display =
+                    "flex";
+
+
+                success.classList.add(
+                    "show"
+                );
+
+
+                // Očisti formu
+
+                form.reset();
+
+            })
+
+
+            .catch(function(error) {
+
+                console.error(
+                    "Greška kod slanja:",
+                    error
+                );
+
+
+                // Omogući ponovni pokušaj ako slanje nije uspjelo
+
+                form.dataset.sending =
+                    "false";
+
+
+                if (submitButton) {
+
+                    submitButton.disabled =
+                        false;
+
+                }
+
+
+                alert(
+                    "Došlo je do greške prilikom slanja poruke. Molimo pokušajte ponovno."
+                );
+
+            });
+
+        }
+
+    );
+
+
+// Skidanje crvenog okvira čim korisnik ispuni polje
+
+document
+    .getElementById(
+        "contact-form"
+    )
+    .addEventListener(
+        "input",
+        function(e) {
+
+            if (
+                e.target.matches(
+                    "input[required], textarea[required]"
+                )
+            ) {
+
+                if (
+                    e.target.type === "checkbox"
+                ) {
+
+                    if (e.target.checked) {
+
+                        e.target.classList.remove(
+                            "required-error"
+                        );
+
+                    }
+
+                } else {
+
+                    if (e.target.value.trim()) {
+
+                        e.target.classList.remove(
+                            "required-error"
+                        );
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    );
+
+
+// Skidanje crvenog okvira kod selecta i checkboxa
+
+document
+    .getElementById(
+        "contact-form"
+    )
+    .addEventListener(
+        "change",
+        function(e) {
+
+            if (
+                e.target.matches(
+                    "input[required], select[required], textarea[required]"
+                )
+            ) {
+
+                if (
+                    e.target.type === "checkbox"
+                ) {
+
+                    if (e.target.checked) {
+
+                        e.target.classList.remove(
+                            "required-error"
+                        );
+
+                    }
+
+                } else if (e.target.value) {
+
+                    e.target.classList.remove(
+                        "required-error"
+                    );
+
+                }
+
+            }
+
+        }
+
+    );
+
+
+document
+    .getElementById(
+        "contact-phone"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            this.value =
+                this.value.replace(
+                    /[^0-9+\(\)\s\-]/g,
+                    ''
+                );
+
+        }
+    );
+
+
+
+/* =========================================================
+   DATATABLES
+========================================================= */
+
+$(document).ready(function() {
+
+    $('#cjenik .cjenik-tablica').DataTable({
+
+        pageLength: 10,
+
+
+        lengthMenu: [
+            [10, 25, -1],
+            [10, 25, "Sve"]
+        ],
+
+
+        ordering: false,
+
+
+        searching: true,
+
+
+        language: {
+
+            lengthMenu:
+                "Prikaži _MENU_ stavki",
+
+            search:
+                "Pretraži:",
+
+            zeroRecords:
+                "Nema pronađenih podataka",
+
+            emptyTable:
+                "Nema podataka u tablici",
+
+            info:
+                "Prikazano _START_ – _END_ od ukupno _TOTAL_ stavki",
+
+            infoEmpty:
+                "Prikazano 0 od 0 stavki",
+
+            infoFiltered:
+                "(filtrirano od ukupno _MAX_ stavki)",
+
+            paginate: {
+
+                first:
+                    "Prva",
+
+                last:
+                    "Zadnja",
+
+                next:
+                    "›",
+
+                previous:
+                    "‹"
+            }
+
+        },
+
+
+        columnDefs: [
+
+            {
+
+                targets: [0, 1, 2],
+
+                className:
+                    "dt-center"
+            }
+
+        ]
+
+    });
+
+});
+
+
+/* =========================================================
+   SCROLL ANIMACIJA
+   SAMO OBJEKTI
+   POZADINE SE NE DIRAJU
+========================================================= */
+
+const elementi =
+    document.querySelectorAll(
+        ".scroll-animacija"
+    );
+
+
+const observer =
+    new IntersectionObserver(
+
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (
+                    entry.isIntersecting
+                ) {
+
+                    entry.target.classList.add(
+                        "prikazi"
+                    );
+
+
+                    /*
+                     * Prestajemo promatrati element
+                     * nakon što se jednom pojavi.
+                     * Tako se animacija ne ponavlja
+                     * prilikom svakog scrollanja.
+                     */
+
+                    observer.unobserve(
+                        entry.target
+                    );
+                }
+
+            });
+
+        },
+
+        {
+
+            threshold: 0.15,
+
+            rootMargin:
+                "0px 0px -40px 0px"
+        }
+
+    );
+
+
+elementi.forEach(element => {
+
+    observer.observe(element);
+
+});
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const menuToggle =
+            document.getElementById(
+                "menu-toggle"
+            );
+
+        const menuLinks =
+            document.querySelectorAll(
+                ".humburger-items a"
+            );
+
+
+        if (!menuToggle) {
+            return;
+        }
+
+
+        // Zatvori hamburger nakon odabira poveznice
+
+        menuLinks.forEach(function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    menuToggle.checked =
+                        false;
+
+                }
+            );
+
+        });
+
+
+        // Zatvori hamburger klikom izvan izbornika
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                const menu =
+                    document.querySelector(
+                        ".humburger-menu"
+                    );
+
+
+                if (
+                    menuToggle.checked &&
+                    menu &&
+                    !menu.contains(event.target)
+                ) {
+
+                    menuToggle.checked =
+                        false;
+                }
+
+            }
+        );
+
+
+        // Zatvori hamburger pritiskom na ESC
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (event.key === "Escape") {
+
+                    menuToggle.checked =
+                        false;
+                }
+
+            }
+        );
+
+    }
+);
+
+
+
+
+/* =========================================================
+   GALERIJA
+========================================================= */
+const slikeOkvir = document.querySelector('.slike-okvir');
+const slike = document.querySelectorAll('.slike-okvir img');
+
+let trenutnaSlika = 0;
+let automatskoPomicanje = null;
+
+
+/* =========================
+   PRIKAŽI TRENUTNU SLIKU
+   ========================= */
+
+function prikaziSliku(index) {
+
+    trenutnaSlika = index;
+
+    slikeOkvir.style.transform =
+        `translateX(-${trenutnaSlika * 100}%)`;
+}
+
+
+/* =========================
+   SLJEDEĆA SLIKA
+   ========================= */
+
+function sljedecaSlika() {
+
+    trenutnaSlika++;
+
+    if (trenutnaSlika >= slike.length) {
+        trenutnaSlika = 0;
+    }
+
+    prikaziSliku(trenutnaSlika);
+
+    resetirajAutomatskoPomicanje();
+}
+
+
+/* =========================
+   PRETHODNA SLIKA
+   ========================= */
+
+function prethodnaSlika() {
+
+    trenutnaSlika--;
+
+    if (trenutnaSlika < 0) {
+        trenutnaSlika = slike.length - 1;
+    }
+
+    prikaziSliku(trenutnaSlika);
+
+    resetirajAutomatskoPomicanje();
+}
+
+
+/* =========================
+   AUTOMATSKO POMICANJE
+   ========================= */
+
+function pokreniAutomatskoPomicanje() {
+
+    clearInterval(automatskoPomicanje);
+
+    automatskoPomicanje = setInterval(function() {
+
+        trenutnaSlika++;
+
+        if (trenutnaSlika >= slike.length) {
+            trenutnaSlika = 0;
+        }
+
+        prikaziSliku(trenutnaSlika);
+
+    }, 4500);
+}
+
+
+/* =========================
+   RESET AUTOMATSKOG POMICANJA
+   ========================= */
+
+function resetirajAutomatskoPomicanje() {
+
+    clearInterval(automatskoPomicanje);
+
+    pokreniAutomatskoPomicanje();
+}
+
+
+/* =========================
+   PRIKAŽI / SAKRI SVE SLIKE
+   ========================= */
+
+function prikaziSveSlike() {
+
+    const galerija = document.getElementById('galerija');
+    const gumb = document.getElementById('gumbGalerija');
+
+    if (galerija.style.display === 'block') {
+
+        galerija.style.display = 'none';
+
+        gumb.textContent = 'Prikaži sve slike';
+
+    } else {
+
+        galerija.style.display = 'block';
+
+        gumb.textContent = 'Sakrij slike';
+
+    }
+}
+
+
+/* =========================
+   ZATVARANJE GALERIJE X
+   ========================= */
+
+function zatvoriGaleriju() {
+
+    const galerija = document.getElementById('galerija');
+    const gumb = document.getElementById('gumbGalerija');
+
+    galerija.style.display = 'none';
+
+    gumb.textContent = 'Prikaži sve slike';
+}
+
+
+/* =========================
+   POKRENI SLIDER
+   ========================= */
+
+pokreniAutomatskoPomicanje();
+
+/* =========================
+   SMJEŠTAJ
+   ========================= */
+
+const sobeOkvir = document.querySelector('.sobe-okvir');
+const sobe = document.querySelectorAll('.soba-kartica');
+
+let trenutniSmjestaj = 0;
+
+function prikaziSobu(index) {
+    trenutniSmjestaj = index;
+
+    sobeOkvir.style.transform =
+        `translateX(-${trenutniSmjestaj * 100}%)`;
+}
+
+function sljedecaSoba() {
+    trenutniSmjestaj++;
+
+    if (trenutniSmjestaj >= sobe.length) {
+        trenutniSmjestaj = 0;
+    }
+
+    prikaziSobu(trenutniSmjestaj);
+}
+
+function prethodnaSoba() {
+    trenutniSmjestaj--;
+
+    if (trenutniSmjestaj < 0) {
+        trenutniSmjestaj = sobe.length - 1;
+    }
+
+    prikaziSobu(trenutniSmjestaj);
+}
+</script>
+
+</body>
+
+</html>

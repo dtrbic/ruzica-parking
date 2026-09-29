@@ -1,0 +1,871 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #172033;
+    background: #eef4ff;
+}
+
+
+/* =========================================================
+   HEADER / LOGO / NAVBAR
+   ========================================================= */
+
+.site-header {
+    position: relative;
+    z-index: 2000;
+}
+
+.floating-header {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.floating-header a,
+.floating-header .humburger-menu {
+    pointer-events: auto;
+}
+
+.logo-link {
+    display: block;
+}
+
+.floating-logo {
+    width: 210px;
+    height: 70px;
+    display: block;
+    margin-bottom: 18px;
+}
+
+.logo-desktop {
+    display: block;
+}
+
+.logo-mobile {
+    display: none;
+}
+
+
+/* =========================================================
+   HAMBURGER
+   ========================================================= */
+
+.humburger-menu {
+    position: relative;
+    width: 60px;
+    height: 55px;
+    z-index: 2000;
+}
+
+.humburger-lines {
+    width: 60px;
+    height: 55px;
+
+    position: absolute;
+    right: 25px;
+    top: -6px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 7px;
+    z-index: 10;
+}
+
+.humburger-lines .line {
+    display: block;
+
+    height: 5px;
+    width: 35px;
+
+    border-radius: 20px;
+    background: #fff;
+
+    transition: .4s ease-in;
+}
+
+.humburger-menu input[type='checkbox'] {
+    width: 60px;
+    height: 55px;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    z-index: 20;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MOBILNI IZBORNIK
+   ========================================================= */
+
+.humburger-items {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    width: 280px;
+    min-height: 100vh;
+
+    padding: 95px 25px 30px;
+
+    background: #06174d;
+
+    box-shadow: -8px 0 25px rgba(0, 0, 0, .25);
+
+    transform: translateX(100%);
+    transition: transform .3s ease;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.humburger-items a {
+    color: #fff;
+    text-decoration: none;
+
+    padding: 14px 15px;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+.humburger-items a:hover,
+.humburger-items a.menu-active {
+    background: rgba(255, 255, 255, .14);
+}
+
+.humburger-menu input[type='checkbox']:checked ~ .humburger-items {
+    transform: translateX(0);
+}
+
+
+/* X IKONA */
+
+.humburger-menu input[type='checkbox']:checked ~ .humburger-lines .line1 {
+    position: absolute;
+    top: 25px;
+    transform: rotate(45deg);
+}
+
+.humburger-menu input[type='checkbox']:checked ~ .humburger-lines .line2 {
+    opacity: 0;
+}
+
+.humburger-menu input[type='checkbox']:checked ~ .humburger-lines .line3 {
+    position: absolute;
+    top: 25px;
+    transform: rotate(-45deg);
+}
+
+
+/* =========================================================
+   GLAVNI NAVBAR
+   ========================================================= */
+
+#navbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+
+    z-index: 1000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 0 20px;
+
+    background: #023978;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .12);
+
+    margin: 0;
+}
+
+#navbar a {
+    display: block;
+
+    color: #f2f2f2;
+
+    text-align: center;
+
+    padding: 20px 16px;
+
+    text-decoration: none;
+
+    font-size: 20px;
+
+    transition:
+        background-color .25s ease,
+        color .25s ease,
+        transform .2s ease;
+}
+
+#navbar a:hover {
+    background: rgba(45, 100, 179, .7);
+    color: #fff;
+    transform: none;
+}
+
+
+/* =========================================================
+   HERO SLIKA
+   ========================================================= */
+
+.privatnost-hero-image {
+    width: 100%;
+    height: 660px;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    border-radius: 0;
+
+    box-shadow:
+        0 10px 30px rgba(11, 37, 92, .22);
+
+    background: #0b255c;
+}
+
+.privatnost-hero-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: 0;
+}
+
+
+/* =========================================================
+   GLAVNA STRANICA POLITIKE PRIVATNOSTI
+   ========================================================= */
+
+.privatnost-page {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 55px 20px 80px;
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(255, 255, 255, .12) 0 90px,
+            transparent 91px
+        ),
+
+        radial-gradient(
+            circle at 90% 35%,
+            rgba(255, 255, 255, .10) 0 120px,
+            transparent 121px
+        ),
+
+        linear-gradient(
+            180deg,
+            #0d2b63 0%,
+            #486cae 35%,
+            #9fc0fb 100%
+        );
+}
+
+
+/* =========================================================
+   GLAVNI BLOK TEKSTA
+   ========================================================= */
+
+.privatnost-sadrzaj {
+    width: min(1000px, 94%);
+
+    margin: 0 auto;
+
+    padding: 50px 65px;
+
+    background: rgba(255, 255, 255, .97);
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 12px 35px rgba(11, 37, 92, .20);
+}
+
+
+/* =========================================================
+   NASLOV
+   ========================================================= */
+
+.privatnost-sadrzaj h1 {
+    margin: 0 0 28px;
+
+    color: #0b255c;
+
+    font-size: clamp(30px, 4vw, 44px);
+
+    line-height: 1.15;
+}
+
+
+/* =========================================================
+   PODNASLOVI
+   ========================================================= */
+
+.privatnost-sadrzaj h2 {
+    margin: 42px 0 17px;
+
+    padding-bottom: 9px;
+
+    border-bottom: 2px solid #dce7f8;
+
+    color: #0b255c;
+
+    font-size: 21px;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   TEKST
+   ========================================================= */
+
+.privatnost-sadrzaj p {
+    margin: 0 0 17px;
+
+    font-size: 15px;
+
+    line-height: 1.75;
+
+    color: #172033;
+}
+
+
+/* =========================================================
+   LINKOVI
+   ========================================================= */
+
+.privatnost-sadrzaj a {
+    color: #0b4d9a;
+
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+}
+
+.privatnost-sadrzaj a:hover {
+    color: #06174d;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer-local {
+    background: #012a59;
+
+    color: #fff;
+
+    padding: 3rem 0;
+
+    font-size: .95rem;
+
+    line-height: 1.6;
+}
+
+.footer-local .container {
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+}
+
+.footer-local__main {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 2.5rem;
+
+    padding-bottom: 2.5rem;
+
+    border-bottom:
+        1px solid rgba(255, 255, 255, .3);
+}
+
+
+/* =========================================================
+   FOOTER - PODACI
+   ========================================================= */
+
+.footer-local__details h3 {
+    color: #fff;
+
+    font-size: 1.25rem;
+
+    margin: 0 0 1.5rem;
+}
+
+.footer-local__details p {
+    margin: 0 0 1rem;
+}
+
+.footer-local__details a {
+    color: #fff;
+
+    text-decoration: none;
+
+    transition: color .2s;
+}
+
+.footer-local__details a:hover {
+    color: #cadefc;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   FOOTER - RADNO VRIJEME
+   ========================================================= */
+
+.footer-local__hours-list {
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
+}
+
+.footer-local__hours-list li {
+    display: flex;
+
+    justify-content: flex-start;
+
+    gap: 20px;
+
+    padding: .25rem 0;
+}
+
+
+/* =========================================================
+   FOOTER - GOOGLE MAPS
+   ========================================================= */
+
+.footer-local__map iframe {
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 250px;
+
+    border: 0;
+
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   FOOTER - DONJI DIO
+   ========================================================= */
+
+.footer-local__bottom {
+    padding-top: 1.5rem;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 1.5rem;
+
+    text-align: center;
+
+    font-size: .875rem;
+}
+
+.footer-local__copyright {
+    font-size: 16px;
+
+    color: #f2f2f2;
+
+    text-align: center;
+}
+
+.footer-local__copyright a {
+    color: #fff;
+
+    text-decoration: none;
+}
+
+.footer-local__copyright a:hover {
+    color: #cadefc;
+
+    text-decoration: underline;
+}
+
+.footer-local__copyright .footer-separator {
+    margin: 0 10px;
+
+    color: rgba(255, 255, 255, .4);
+
+    font-weight: 300;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 992px) {
+
+    .footer-local__main {
+        grid-template-columns: 1fr 1.2fr;
+
+        gap: 4rem;
+    }
+
+    .footer-local__bottom {
+        flex-direction: row;
+
+        justify-content: space-between;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILNI PRIKAZ
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .floating-header {
+        height: 55px;
+
+        padding: 0 8px;
+    }
+
+    .logo-desktop {
+        display: none;
+    }
+
+    .logo-mobile {
+        display: block;
+
+        width: 125px;
+
+        height: auto;
+
+        margin-bottom: 0;
+    }
+
+
+    /* HAMBURGER */
+
+    .humburger-menu {
+        position: fixed;
+
+        top: 6px;
+        right: 8px;
+
+        width: 44px;
+        height: 44px;
+    }
+
+    .humburger-lines {
+        width: 44px;
+        height: 44px;
+
+        right: 0;
+        top: 0;
+
+        gap: 5px;
+
+        background: rgba(255, 255, 255, .92);
+
+        border-radius: 50%;
+
+        box-shadow:
+            0 3px 10px rgba(0, 0, 0, .18);
+    }
+
+    .humburger-lines .line {
+        width: 25px;
+
+        height: 3px;
+
+        background: #06174d;
+    }
+
+    .humburger-menu input[type='checkbox'] {
+        width: 44px;
+        height: 44px;
+
+        right: 0;
+        top: 0;
+    }
+
+    .humburger-menu input[type='checkbox']:checked ~ .humburger-lines {
+        background: #06174d;
+    }
+
+    .humburger-menu input[type='checkbox']:checked ~ .humburger-lines .line {
+        background: #fff;
+    }
+
+
+    /* MOBILNI NAVBAR */
+
+    #navbar {
+        position: sticky;
+
+        top: 0;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+
+        padding: 0 6px;
+
+        gap: 2px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        white-space: nowrap;
+
+        scrollbar-width: none;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    #navbar a {
+        flex: 0 0 auto;
+
+        padding: 12px 10px;
+
+        font-size: 14px;
+
+        white-space: nowrap;
+    }
+
+
+    /* HERO SLIKA */
+
+    .privatnost-hero-image {
+        height: 200px;
+    }
+
+
+    /* GLAVNI SADRŽAJ */
+
+    .privatnost-page {
+        padding: 45px 10px 50px;
+    }
+
+    .privatnost-sadrzaj {
+        width: 100%;
+
+        padding: 30px 20px;
+
+        border-radius: 16px;
+    }
+
+    .privatnost-sadrzaj h1 {
+        font-size: 30px;
+    }
+
+    .privatnost-sadrzaj h2 {
+        margin-top: 34px;
+
+        font-size: 19px;
+    }
+
+    .privatnost-sadrzaj p {
+        font-size: 14px;
+
+        line-height: 1.65;
+    }
+
+
+    /* FOOTER */
+
+    .footer-local {
+        padding: 2.5rem 0;
+    }
+
+    .footer-local .container {
+        width: 90%;
+    }
+
+    .footer-local__map iframe {
+        min-height: 250px;
+    }
+
+    .footer-local__copyright {
+        font-size: 14px;
+
+        line-height: 1.8;
+    }
+
+}
+/* =========================================================
+   JEZICI - UVIJEK FIKSNO NA VRHU
+========================================================= */
+
+.language-switcher {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    width: max-content;
+
+    z-index: 9999;
+}
+
+.language-switcher a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #ffffff;
+    text-decoration: none;
+
+    font-size: 18px;
+    font-weight: 500;
+
+    transition: opacity 0.2s ease;
+}
+
+.language-switcher a:hover {
+    opacity: 0.75;
+}
+
+.language-switcher a.active {
+    opacity: 1;
+}
+
+.language-switcher a img {
+    width: 24px;
+    height: 16px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 2px;
+}
+
+.language-switcher span {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 400;
+}
+/* MOBITEL */
+@media (max-width: 700px) {
+
+    /* BIJELI LOGO SAKRIJ */
+    .floating-logo {
+        display: none !important;
+    }
+
+    /* TAMNI LOGO PRIKAŽI */
+    .logo-mobile {
+        display: block !important;
+        width: 125px !important;
+        height: auto !important;
+        max-width: 125px !important;
+        margin: 0 !important;
+    }
+}
+
+/* JEZICI - MOBITEL */
+@media (max-width: 700px) {
+
+    .language-switcher {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        margin: 10px auto;
+        font-size: 12px;
+    }
+
+    .language-switcher a {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        text-decoration: none;
+        color: inherit;
+        white-space: nowrap;
+    }
+
+    .language-switcher a span {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .language-switcher img {
+        width: 20px;
+        height: 14px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .language-switcher > span {
+        font-size: 12px;
+        opacity: 0.7;
+    }
+}
