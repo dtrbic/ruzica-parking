@@ -4950,97 +4950,42 @@ body {
    CJENIK - MOBITEL
    ========================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
 
-    #cjenik {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 30px 10px 40px;
-        overflow: hidden;
-    }
-
-    /* NASLOV */
-
-    #cjenik > h2 {
-        font-size: 24px !important;
-        line-height: 1.2;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* TABLICA */
-
+    /* Wrapper tablice */
     #cjenik .tablica-premotaj {
-        width: 90%;
-        max-width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
     }
 
+    /* Tablica */
     #cjenik .cjenik-tablica {
-        width: 90%;
-        min-width: 0;
-        table-layout: fixed;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        table-layout: fixed !important;
     }
 
+    /* Ćelije */
     #cjenik .cjenik-tablica th,
     #cjenik .cjenik-tablica td {
-        font-size: 14px;
-        padding: 8px 4px;
+        width: auto !important;
+        max-width: none !important;
+        font-size: 13px !important;
+        padding: 7px 3px !important;
         text-align: center;
-        word-break: normal;
-    }
-
-    #cjenik .cjenik-tablica th {
-        line-height: 1.2;
+        box-sizing: border-box;
     }
 
     #cjenik .cjenik-tablica th span {
-        font-size: 14px;
+        font-size: 13px !important;
     }
 
-    /* NAPOMENA */
-
-    #cjenik .cjenik-napomena {
-        font-size: 17px;
-        line-height: 1.4;
-        text-align: center;
-        padding: 0 5px;
-    }
-
-    #cjenik .cjenik-napomena strong {
-        font-size: 17px !important;
-    }
-
-    /* PODACI */
-
-    #cjenik .cjenik-info {
-        text-align: center;
-    }
-
-    #cjenik .cjTekstinfo {
-        font-size: 17px !important;
-        line-height: 1.5;
-        margin: 5px 0;
-    }
-
-    /* GUMBI */
-
-    #cjenik .cjenik-gumbi {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    #cjenik .cjenik-download {
-        width: fit-content;
-        max-width: 90%;
-        text-align: center;
-        padding: 10px 18px;
-        font-size: 14px;
-        box-sizing: border-box;
+    /* Spriječi horizontalno širenje cijelog cjenika */
+    #cjenik {
+        overflow-x: hidden !important;
     }
 
 }
@@ -5064,24 +5009,83 @@ body {
 
 @media (max-width: 991px) {
 
-    #kako-do-nas .footer-local__map.mala-karta {
+    #rezervacija .footer-local__map.mala-karta {
         width: 400px !important;
         max-width: 400px !important;
-        height: 190px !important;
+        height: 200px !important;
         margin: 0 auto !important;
         padding: 0 !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
     }
 
-    #kako-do-nas .footer-local__map.mala-karta iframe {
+    #rezervacija .footer-local__map.mala-karta iframe {
         width: 400px !important;
         max-width: 400px !important;
-        height: 190px !important;
+        height: 200px !important;
         display: block !important;
         margin: 0 !important;
         padding: 0 !important;
         border: 0 !important;
     }
+
+}
+
+/* =========================================
+   CJENIK - BEZ HORIZONTALNOG SCROLLA
+   SAMO MOBITEL
+   ========================================= */
+
+@media (max-width: 1000px) {
+
+    #cjenik,
+    #cjenik .tablica-premotaj,
+    #cjenik .dataTables_wrapper,
+    #cjenik .dataTables_scroll,
+    #cjenik .dataTables_scrollHead,
+    #cjenik .dataTables_scrollBody,
+    #cjenik .dataTables_scrollFoot {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+
+    #cjenik .cjenik-tablica {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        table-layout: fixed !important;
+    }
+
+    #cjenik .cjenik-tablica th,
+    #cjenik .cjenik-tablica td {
+        width: auto !important;
+        max-width: none !important;
+        box-sizing: border-box !important;
+        padding: 6px 3px !important;
+        font-size: 13px !important;
+        text-align: center !important;
+    }
+	
+	  #cjenik .cjenik-gumbi {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        margin-top: 15px;
+    }
+
+    #cjenik .cjenik-download {
+        width: auto !important;
+        max-width: 80% !important;
+        padding: 7px 14px !important;
+        font-size: 13px !important;
+        line-height: 1.2;
+        box-sizing: border-box !important;
+    }
+
+}
 
 }
