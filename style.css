@@ -5010,7 +5010,6 @@ body {
 }
 @media (max-width: 700px) {
     #pocetna img {
-        width: 100%;
-        height: auto;
+        height: 200px;
     }
 }
