@@ -5002,41 +5002,9 @@ body {
     }
 
 }
-@media (max-width: 1000px) {
 
-    #cjenik .cjenik-tablica th {
-        font-size: 11px !important;
-    }
 
-}
 
-/* =========================================
-   KAKO DO NAS - KARTA
-   ========================================= */
-
-@media (max-width: 1000px) {
-
-    #rezervacija .footer-local__map.mala-karta {
-        width: 100px !important;
-        max-width: 100px !important;
-        height: 190px !important;
-        margin: 0 auto !important;
-        padding: 0 !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important;
-    }
-
-    #rezervacija .footer-local__map.mala-karta iframe {
-        width: 100px !important;
-        max-width: 100px !important;
-        height: 190px !important;
-        display: block !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        border: 0 !important;
-    }
-
-}
 
 /* =========================================
    CJENIK - BEZ HORIZONTALNOG SCROLLA
@@ -5088,11 +5056,44 @@ body {
         width: auto !important;
         max-width: 80% !important;
         padding: 7px 14px !important;
-        font-size: 13px !important;
+        font-size: 10px !important;
         line-height: 1.2;
         box-sizing: border-box !important;
     }
+	 #cjenik .cjenik-tablica th {
+        font-size: 8px !important;
+    }
 
 }
+
+}
+
+
+}
+/* =========================================
+   KAKO DO NAS - KARTA
+   ========================================= */
+
+@media (max-width: 1000px) {
+
+    #rezervacija .footer-local__map.mala-karta {
+        width: 100% !important;
+        max-width: 400px !important;
+        height: 190px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    #rezervacija .footer-local__map.mala-karta iframe {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 190px !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+    }
 
 }
