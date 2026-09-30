@@ -1859,22 +1859,36 @@ h2{
 }
   
 
-
   
-/* SEKCIJE STRANICE*/
+/* =========================================================
+   HERO SLIKA NA INDEXU
+   ========================================================= */
 
+.uvjeti-hero-image {
+    width: 100% !important;
+    height: 660px !important;
 
-/*1 sekcija*/
-#pocetna {
-    width: 100%;
-    overflow: hidden;
-    padding-top: 20px;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    background: #0b255c;
 }
 
-#pocetna img {
-    width: 100%;
-    height: auto;
-    display: block;
+.uvjeti-hero-image img {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: block !important;
+
+    object-fit: cover !important;
+    object-position: center !important;
+
+    border-radius: 0 !important;
 }
 
 h1{
@@ -4521,104 +4535,7 @@ body {
 
 }
 
-/* =========================================
-   CJENIK - MOBITEL
-   ========================================= */
 
-@media (max-width: 700px) {
-
-    #cjenik {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 30px 10px 40px;
-        overflow: hidden;
-    }
-
-    /* NASLOV */
-
-    #cjenik > h2 {
-        font-size: 24px !important;
-        line-height: 1.2;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    /* TABLICA */
-
-    #cjenik .tablica-premotaj {
-        width: 100%;
-        max-width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    #cjenik .cjenik-tablica {
-        width: 100%;
-        min-width: 0;
-        table-layout: fixed;
-    }
-
-    #cjenik .cjenik-tablica th,
-    #cjenik .cjenik-tablica td {
-        font-size: 14px;
-        padding: 8px 4px;
-        text-align: center;
-        word-break: normal;
-    }
-
-    #cjenik .cjenik-tablica th {
-        line-height: 1.2;
-    }
-
-    #cjenik .cjenik-tablica th span {
-        font-size: 14px;
-    }
-
-    /* NAPOMENA */
-
-    #cjenik .cjenik-napomena {
-        font-size: 17px;
-        line-height: 1.4;
-        text-align: center;
-        padding: 0 5px;
-    }
-
-    #cjenik .cjenik-napomena strong {
-        font-size: 17px !important;
-    }
-
-    /* PODACI */
-
-    #cjenik .cjenik-info {
-        text-align: center;
-    }
-
-    #cjenik .cjTekstinfo {
-        font-size: 17px !important;
-        line-height: 1.5;
-        margin: 5px 0;
-    }
-
-    /* GUMBI */
-
-    #cjenik .cjenik-gumbi {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    #cjenik .cjenik-download {
-        width: fit-content;
-        max-width: 90%;
-        text-align: center;
-        padding: 10px 18px;
-        font-size: 14px;
-        box-sizing: border-box;
-    }
-
-}
 /* =========================================
    KAKO DO NAS + O NAMA - MOBITEL
    ========================================= */
@@ -5008,8 +4925,163 @@ body {
 #smjestaji + * {
     margin-top: 0 !important;
 }
+/* HERO - MOBITEL */
 @media (max-width: 700px) {
-    #pocetna img {
-        height: 200px;
+    .uvjeti-hero-image {
+        width: 100% !important;
+        height: 200px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        overflow: hidden !important;
     }
+
+    .uvjeti-hero-image img {
+        width: 100% !important;
+        height: 200px !important;
+        display: block !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        border-radius: 0 !important;
+    }
+}
+/* =========================================
+   CJENIK - MOBITEL
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    #cjenik {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 30px 10px 40px;
+        overflow: hidden;
+    }
+
+    /* NASLOV */
+
+    #cjenik > h2 {
+        font-size: 24px !important;
+        line-height: 1.2;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* TABLICA */
+
+    #cjenik .tablica-premotaj {
+        width: 90%;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #cjenik .cjenik-tablica {
+        width: 90%;
+        min-width: 0;
+        table-layout: fixed;
+    }
+
+    #cjenik .cjenik-tablica th,
+    #cjenik .cjenik-tablica td {
+        font-size: 14px;
+        padding: 8px 4px;
+        text-align: center;
+        word-break: normal;
+    }
+
+    #cjenik .cjenik-tablica th {
+        line-height: 1.2;
+    }
+
+    #cjenik .cjenik-tablica th span {
+        font-size: 14px;
+    }
+
+    /* NAPOMENA */
+
+    #cjenik .cjenik-napomena {
+        font-size: 17px;
+        line-height: 1.4;
+        text-align: center;
+        padding: 0 5px;
+    }
+
+    #cjenik .cjenik-napomena strong {
+        font-size: 17px !important;
+    }
+
+    /* PODACI */
+
+    #cjenik .cjenik-info {
+        text-align: center;
+    }
+
+    #cjenik .cjTekstinfo {
+        font-size: 17px !important;
+        line-height: 1.5;
+        margin: 5px 0;
+    }
+
+    /* GUMBI */
+
+    #cjenik .cjenik-gumbi {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    #cjenik .cjenik-download {
+        width: fit-content;
+        max-width: 90%;
+        text-align: center;
+        padding: 10px 18px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+}
+/* =========================================
+   CJENIK - UKLANJANJE BIJELOG BLOKA
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    #cjenik .tablica-premotaj {
+        background: transparent !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+}
+
+/* =========================================
+   KAKO DO NAS - KARTA
+   ========================================= */
+
+@media (max-width: 991px) {
+
+    #kako-do-nas .footer-local__map.mala-karta {
+        width: 400px !important;
+        max-width: 400px !important;
+        height: 190px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    #kako-do-nas .footer-local__map.mala-karta iframe {
+        width: 400px !important;
+        max-width: 400px !important;
+        height: 190px !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+    }
+
 }
