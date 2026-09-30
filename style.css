@@ -5116,3 +5116,12 @@ body {
     }
 
 }
+
+@media (max-width: 700px) {
+    .slike-okvir img:nth-child(1),
+    .slike-okvir img:nth-child(6),
+    .slike-okvir img:nth-child(9) {
+        object-fit: contain !important;
+        background: #0b2342;
+    }
+}
