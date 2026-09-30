@@ -1865,13 +1865,16 @@ h2{
 
 
 /*1 sekcija*/
-#pocetna{
-background-image: url("slike/pocetna5.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 660px;
-	padding-top: 20px;
+#pocetna {
+    width: 100%;
+    overflow: hidden;
+    padding-top: 20px;
+}
+
+#pocetna img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 h1{
@@ -4634,7 +4637,7 @@ body {
     }
 
     .footer-local__map.mala-karta {
-        width: 300px !important;
+        width: 190px !important;
         height: 190px !important;
         margin: 0 auto;
         border-radius: 10px;
@@ -5004,4 +5007,10 @@ body {
 
 #smjestaji + * {
     margin-top: 0 !important;
+}
+@media (max-width: 700px) {
+    #pocetna img {
+        width: 100%;
+        height: auto;
+    }
 }

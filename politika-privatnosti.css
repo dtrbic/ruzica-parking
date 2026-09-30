@@ -869,3 +869,50 @@ body {
         opacity: 0.7;
     }
 }
+@media (max-width: 700px) {
+
+    #navbar {
+        gap: 2px;
+        padding: 0 6px;
+        width: 100%;
+        box-sizing: border-box;
+        overflow-x: auto;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    #navbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    #navbar a {
+        flex: 0 0 auto;
+        padding: 15px 10px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    #navbar a.active {
+        padding: 14px 12px;
+        border-radius: 7px;
+    }
+
+}
+/* MOBITEL */
+@media (max-width: 700px) {
+
+    /* BIJELI LOGO SAKRIJ */
+    .floating-logo {
+        display: none !important;
+    }
+
+    /* TAMNI LOGO PRIKAŽI */
+    .logo-mobile {
+        display: block !important;
+        width: 125px !important;
+        height: auto !important;
+        max-width: 125px !important;
+        margin: 0 !important;
+    }
+}
