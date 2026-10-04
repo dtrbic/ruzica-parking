@@ -5142,111 +5142,69 @@ body {
 }
 
 /* =========================================
-   RECENZIJE - MODERNE KARTICE
+   RECENZIJE - 3 KARTICE U JEDNOM REDU
 ========================================= */
 
 .reviews-slider-container {
     position: relative;
-    width: min(1100px, 92%);
+    width: 92%;
+    max-width: 1100px;
     margin: 40px auto;
-    padding: 25px 65px;
+    padding: 20px 50px;
     background: transparent;
-    box-shadow: none;
-    border-radius: 0;
-    text-align: center;
-    overflow: visible;
-    font-family: Arial, sans-serif;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+/* 3 recenzije u jednom redu */
+.reviews-slider-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
 }
 
 
 /* =========================================
-   POJEDINAČNA RECENZIJA
+   POJEDINAČNA KARTICA
 ========================================= */
 
-.review-card {
-    display: none;
-    animation: fadeEffect 0.6s ease-in-out;
+.review-card,
+.review-card.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 
     background: #ffffff;
     border-radius: 14px;
-    padding: 25px 30px;
-    min-height: 245px;
 
+    padding: 20px 18px 22px;
+
+    min-height: 245px;
     box-sizing: border-box;
 
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
 
-    cursor: default;
+    animation: fadeEffect 0.6s ease-in-out;
 }
 
-/* Aktivna recenzija */
-.review-card.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
-/* POP-UP EFEKT KAD PREĐEŠ MIŠEM */
-.review-card.active:hover {
-    transform: translateY(-8px) scale(1.015);
+/* POP-UP KAD PREĐEŠ MIŠEM */
+.review-card:hover {
+    transform: translateY(-7px) scale(1.02);
 
-    box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
 }
 
 
 /* =========================================
-   ZVJEZDICE
+   SLIKA PROFILA - PRVA
 ========================================= */
-
-.stars {
-    color: #ffb300;
-    font-size: 25px;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-    line-height: 1;
-}
-
-
-/* =========================================
-   TEKST RECENZIJE
-========================================= */
-
-.review-text {
-    font-style: normal;
-    font-size: 15px;
-    color: #222;
-    line-height: 1.5;
-
-    margin: 5px auto 18px;
-
-    max-width: 430px;
-    min-height: 65px;
-
-    word-wrap: break-word;
-}
-
-
-/* =========================================
-   PROFIL + IME
-========================================= */
-
-.review-author-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 5px;
-    margin-top: 5px;
-}
 
 .review-avatar {
     width: 58px;
@@ -5254,9 +5212,64 @@ body {
 
     border-radius: 50%;
     object-fit: cover;
+
     display: block;
 
+    margin-bottom: 10px;
+
     border: 2px solid #eeeeee;
+}
+
+
+/* =========================================
+   ZVJEZDICE - ISPOD SLIKE
+========================================= */
+
+.stars {
+    color: #ffb300;
+
+    font-size: 22px;
+    letter-spacing: 1px;
+    line-height: 1;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================
+   TEKST - ISPOD ZVJEZDICA
+========================================= */
+
+.review-text {
+    font-style: normal;
+
+    font-size: 14px;
+    color: #222;
+
+    line-height: 1.5;
+
+    text-align: center;
+
+    margin: 0 auto 12px;
+
+    max-width: 300px;
+
+    word-wrap: break-word;
+}
+
+
+/* =========================================
+   IME
+========================================= */
+
+.review-author-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 3px;
+
+    margin-top: auto;
 }
 
 .review-author {
@@ -5276,7 +5289,7 @@ body {
 .review-date {
     margin-top: 3px;
 
-    font-size: 13px;
+    font-size: 12px;
     color: #888;
 }
 
@@ -5288,11 +5301,11 @@ body {
 .google-review-link {
     display: inline-block;
 
-    margin-top: 8px;
+    margin-top: 6px;
 
-    font-size: 12px;
+    font-size: 11px;
+
     color: #888;
-
     text-decoration: none;
 }
 
@@ -5322,21 +5335,15 @@ body {
     color: #0b255c;
 
     border: none;
+    border-radius: 50%;
 
     font-size: 25px;
-    line-height: 1;
 
     cursor: pointer;
 
-    border-radius: 50%;
-
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 
-    transition:
-        background 0.25s ease,
-        transform 0.25s ease,
-        color 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: all 0.25s ease;
 }
 
 .slider-btn:hover {
@@ -5344,26 +5351,14 @@ body {
     color: #ffffff;
 
     transform: translateY(-50%) scale(1.08);
-
-    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
 }
 
 .prev-btn {
-    left: 10px;
+    left: 0;
 }
 
 .next-btn {
-    right: 10px;
-}
-
-
-/* =========================================
-   AKO NEMA RECENZIJA
-========================================= */
-
-.no-reviews {
-    padding: 30px;
-    color: #555;
+    right: 0;
 }
 
 
@@ -5372,7 +5367,6 @@ body {
 ========================================= */
 
 @keyframes fadeEffect {
-
     from {
         opacity: 0;
         transform: translateY(8px);
@@ -5389,52 +5383,15 @@ body {
    MOBITEL
 ========================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
 
     .reviews-slider-container {
-        width: 94%;
-        margin: 30px auto;
-        padding: 20px 45px;
+        grid-template-columns: 1fr;
+        width: 90%;
+        padding: 20px 35px;
     }
 
     .review-card {
-        min-height: 260px;
-        padding: 22px 20px;
-    }
-
-    .review-card.active:hover {
-        transform: translateY(-4px) scale(1.01);
-    }
-
-    .stars {
-        font-size: 23px;
-    }
-
-    .review-text {
-        font-size: 15px;
-        line-height: 1.5;
-    }
-
-    .review-avatar {
-        width: 52px;
-        height: 52px;
-    }
-
-    .review-author {
-        font-size: 15px;
-    }
-
-    .slider-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 22px;
-    }
-
-    .prev-btn {
-        left: 3px;
-    }
-
-    .next-btn {
-        right: 3px;
+        min-height: 240px;
     }
 }
