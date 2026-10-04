@@ -4107,96 +4107,95 @@ async function initReviews() {
 }
 
 
-/* =========================================================
-   Prikaz recenzija
-   ========================================================= */
-
 function renderReviewsHTML() {
-
-    if (
-        !reviewsData ||
-        reviewsData.length === 0
-    ) {
-
+    if (!reviewsData || reviewsData.length === 0) {
         wrapper.innerHTML =
-            "<p>Trenutno nema dostupnih recenzija.</p>";
+            '<div class="no-reviews">' +
+                '<p>Trenutno nema dostupnih recenzija.</p>' +
+            '</div>';
 
         return;
     }
 
-
     wrapper.innerHTML = '';
-
     currentIndex = 0;
 
+    reviewsData.forEach((review, index) => {
 
-    reviewsData.forEach(
-        (review, index) => {
+        const card = document.createElement('div');
+        card.className = `review-card ${index === 0 ? 'active' : ''}`;
 
-            const card =
-                document.createElement('div');
+        // ⭐ Ocjena
+        const rating = Number(review.rating) || 0;
 
-
-            card.className =
-                `review-card ${
-                    index === 0
-                        ? 'active'
-                        : ''
-                }`;
+        const stars = document.createElement('div');
+        stars.className = 'stars';
+        stars.textContent =
+            '★'.repeat(rating) + '☆'.repeat(5 - rating);
 
 
-            /* Zvjezdice */
+        // 👤 Profilna slika
+        const authorBox = document.createElement('div');
+        authorBox.className = 'review-author-box';
 
-            const rating =
-                Number(review.rating) || 0;
+        const avatar = document.createElement('img');
+        avatar.className = 'review-avatar';
+        avatar.src =
+            review.authorAttribution?.photoUri ||
+            'slike/default-user.webp';
+        avatar.alt = 'Profilna fotografija autora recenzije';
 
+        avatar.onerror = function () {
+            this.style.display = 'none';
+        };
 
-            const starsText =
-                '★'.repeat(rating) +
-                '☆'.repeat(5 - rating);
+        // 👤 Ime autora
+        const authorName = document.createElement('div');
+        authorName.className = 'review-author';
 
+        authorName.textContent =
+            review.authorAttribution?.displayName ||
+            'Google korisnik';
 
-            /* Tekst recenzije */
+        authorBox.appendChild(avatar);
+        authorBox.appendChild(authorName);
 
-            const reviewText =
-                review.text ||
-                'Korisnik je ostavio samo ocjenu, bez teksta.';
+        // 💬 Tekst recenzije
+        const reviewText = document.createElement('p');
+        reviewText.className = 'review-text';
 
+        reviewText.textContent =
+            review.text?.text ||
+            review.originalText?.text ||
+            'Korisnik je ostavio samo ocjenu, bez teksta.';
 
-            /* Ime autora */
+        // 📅 Datum
+        const reviewDate = document.createElement('div');
+        reviewDate.className = 'review-date';
 
-            const authorName =
-                review.authorAttribution?.displayName ||
-                review.author_name ||
-                'Google korisnik';
+        reviewDate.textContent =
+            review.relativePublishTimeDescription || '';
 
+        // 🔗 Google Maps link
+        const googleLink = document.createElement('a');
+        googleLink.className = 'google-review-link';
+        googleLink.href = review.googleMapsUri || '#';
+        googleLink.target = '_blank';
+        googleLink.rel = 'noopener noreferrer';
+        googleLink.textContent = 'Pogledaj recenziju na Googleu';
 
-            card.innerHTML =
+        // Složi karticu
+        card.appendChild(stars);
+        card.appendChild(reviewText);
+        card.appendChild(authorBox);
+        card.appendChild(reviewDate);
 
-                '<div class="stars">' +
-                    starsText +
-                '</div>' +
-
-                '<p class="review-text">' +
-                    '"' +
-                    reviewText +
-                    '"' +
-                '</p>' +
-
-                '<h4 class="review-author">' +
-                    authorName +
-                '</h4>';
-
-
-            /*
-             VAŽNO:
-             Dodavanje kartice u reviews-wrapper.
-            */
-
-            wrapper.appendChild(card);
+        if (review.googleMapsUri) {
+            card.appendChild(googleLink);
         }
-    );
 
+        wrapper.appendChild(card);
+    });
 
     startSliderLogic();
 }
