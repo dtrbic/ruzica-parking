@@ -5142,32 +5142,48 @@ body {
 }
 
 /* =========================================
-   RECENZIJE - IZGLED KAO GOOGLE RECENZIJE
+   RECENZIJE - 3 U JEDNOM REDU
 ========================================= */
 
 .reviews-slider-container {
     position: relative;
+
     width: 92%;
     max-width: 1100px;
+
     margin: 55px auto;
     padding: 0 45px;
+
     box-sizing: border-box;
 
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+
+    gap: 15px;
+
+    overflow: visible;
 
     font-family: Arial, sans-serif;
 }
 
 
 /* =========================================
-   KARTICA
+   3 KARTICE VODORAVNO
 ========================================= */
 
 .review-card,
 .review-card.active {
     display: flex !important;
+
+    flex: 0 0 calc((100% - 30px) / 3) !important;
+    width: calc((100% - 30px) / 3) !important;
+    max-width: calc((100% - 30px) / 3) !important;
+
+    min-width: 0 !important;
+
+    box-sizing: border-box;
+
     flex-direction: column;
     align-items: center;
 
@@ -5177,14 +5193,11 @@ body {
 
     border-radius: 10px;
 
-    min-height: 245px;
-
     padding: 0 25px 22px;
 
-    box-sizing: border-box;
+    min-height: 245px;
 
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
 
     transition:
         transform 0.25s ease,
@@ -5194,15 +5207,16 @@ body {
 }
 
 
-/* POP-UP EFEKT */
+/* =========================================
+   POP-UP NA HOVER
+========================================= */
 
 .review-card:hover {
     transform: translateY(-8px) scale(1.025);
 
-    box-shadow:
-        0 12px 25px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.20);
 
-    z-index: 5;
+    z-index: 20;
 }
 
 
@@ -5218,10 +5232,8 @@ body {
 
     object-fit: cover;
 
-    display: block;
-
     margin-top: -29px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
     border: 2px solid #eeeeee;
 
@@ -5233,12 +5245,14 @@ body {
 
 
 /* =========================================
-   IME
+   IME + DATUM
 ========================================= */
 
 .review-author-box {
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
     gap: 3px;
@@ -5257,11 +5271,6 @@ body {
 
     color: #111111;
 }
-
-
-/* =========================================
-   DATUM
-========================================= */
 
 .review-date {
     margin: 2px 0 10px;
@@ -5290,7 +5299,7 @@ body {
 
 
 /* =========================================
-   TEKST RECENZIJE
+   TEKST
 ========================================= */
 
 .review-text {
@@ -5307,8 +5316,6 @@ body {
     color: #222222;
 
     font-style: normal;
-
-    word-wrap: break-word;
 }
 
 
@@ -5328,10 +5335,6 @@ body {
     text-decoration: none;
 }
 
-.google-review-link:hover {
-    text-decoration: underline;
-}
-
 
 /* =========================================
    STRELICE
@@ -5348,12 +5351,13 @@ body {
     height: 42px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    background: #ffffff;
+    background: white;
 
-    color: #555555;
+    color: #555;
 
     border: none;
 
@@ -5361,30 +5365,17 @@ body {
 
     font-size: 27px;
 
-    line-height: 1;
-
     cursor: pointer;
 
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 
-    z-index: 10;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+    z-index: 30;
 }
 
 .slider-btn:hover {
-    background: #ffffff;
-
-    color: #333333;
-
     transform: translateY(-50%) scale(1.08);
 
-    box-shadow:
-        0 5px 14px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
 }
 
 .prev-btn {
@@ -5397,51 +5388,27 @@ body {
 
 
 /* =========================================
-   ANIMACIJA
-========================================= */
-
-@keyframes fadeEffect {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-
-/* =========================================
    MOBITEL
 ========================================= */
 
 @media (max-width: 800px) {
 
     .reviews-slider-container {
-        width: 90%;
+        width: 92%;
+
         padding: 0 30px;
 
-        grid-template-columns: 1fr;
+        flex-direction: column !important;
 
         gap: 35px;
     }
 
-    .review-card {
-        min-height: 240px;
-    }
+    .review-card,
+    .review-card.active {
+        width: 100% !important;
 
-    .review-avatar {
-        width: 54px;
-        height: 54px;
+        max-width: 100% !important;
 
-        margin-top: -27px;
-    }
-
-    .stars {
-        font-size: 20px;
-    }
-
-    .review-text {
-        font-size: 14px;
+        flex: 0 0 100% !important;
     }
 }
