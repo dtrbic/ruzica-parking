@@ -1447,11 +1447,108 @@ Naš cilj je steći ugodno i dugoročno poslovanje,te Vam omogućiti bezbrižno 
 <div id="cjenik" class="content">
 
     <h2 class="scroll-animacija">
-        Cjenik
+        ZIMSKI Cjenik
     </h2>
 
 
-    <div class="tablica-premotaj scroll-animacija">
+<div class="tablica-premotaj scroll-animacija">
+
+        <table class="cjenik-tablica display">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        DAN
+                    </th>
+
+                    <th>
+                        VAŽEĆA CIJENA
+                    </th>
+
+                    <th>
+                        <span>
+                            SIDRENA CIJENA
+                        </span>
+                        <br>
+                        10.09.2026.
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <tr><td>1</td><td>8 €</td><td>10 €</td></tr>
+                <tr><td>2</td><td>15 €</td><td>15 €</td></tr>
+                <tr><td>3</td><td>20 €</td><td>20 €</td></tr>
+                <tr><td>4</td><td>23 €</td><td>25 €</td></tr>
+                <tr><td>5</td><td>28 €</td><td>30 €</td></tr>
+                <tr><td>6</td><td>33 €</td><td>35 €</td></tr>
+                <tr><td>7</td><td>38 €</td><td>40 €</td></tr>
+                <tr><td>8</td><td>43 €</td><td>45 €</td></tr>
+                <tr><td>9</td><td>48 €</td><td>50 €</td></tr>
+                <tr><td>10</td><td>53 €</td><td>55 €</td></tr>
+                <tr><td>11</td><td>54 €</td><td>59 €</td></tr>
+                <tr><td>12</td><td>60 €</td><td>63 €</td></tr>
+                <tr><td>13</td><td>64 €</td><td>67 €</td></tr>
+                <tr><td>14</td><td>69 €</td><td>71 €</td></tr>
+                <tr><td>15</td><td>72 €</td><td>75 €</td></tr>
+                <tr><td>16</td><td>76 €</td><td>79 €</td></tr>
+                <tr><td>17</td><td>80 €</td><td>83 €</td></tr>
+                <tr><td>18</td><td>84 €</td><td>87 €</td></tr>
+                <tr><td>19</td><td>88 €</td><td>91 €</td></tr>
+                <tr><td>20</td><td>92 €</td><td>95 €</td></tr>
+                <tr><td>21</td><td>96 €</td><td>99 €</td></tr>
+                <tr><td>22</td><td>100 €</td><td>103 €</td></tr>
+                <tr><td>23</td><td>104 €</td><td>107 €</td></tr>
+                <tr><td>24</td><td>108 €</td><td>111 €</td></tr>
+                <tr><td>25</td><td>112 €</td><td>115 €</td></tr>
+                <tr><td>26</td><td>116 €</td><td>119 €</td></tr>
+                <tr><td>27</td><td>120 €</td><td>123 €</td></tr>
+                <tr><td>28</td><td>124 €</td><td>127 €</td></tr>
+                <tr><td>29</td><td>128 €</td><td>131 €</td></tr>
+                <tr><td>30</td><td>132 €</td><td>135 €</td></tr>
+                <tr><td>31</td><td>136 €</td><td>139 €</td></tr>
+
+            </tbody>
+
+        </table>
+<br>
+
+        <div
+            class="cjenik-napomena scroll-animacija"
+           >
+			<strong style="font-size:20px;">
+            MJESEČNI NAJAM PARKINGA ZA RADNIKE
+            PREMA DOGOVORU
+			</strong>
+        </div>
+		
+
+<br>
+        <div class="cjenik-info scroll-animacija">
+
+            <p  class="cjTekstinfo">
+              
+                    RUŽICA PARKING AIRPORT j.d.o.o.
+                
+            </p>
+            <p class="cjTekstinfo">
+                
+                    TEL:
+                +385 98 922 5688
+
+            </p>
+
+        </div>
+</div>
+
+
+   <!-- <div class="tablica-premotaj scroll-animacija">
 
         <table class="cjenik-tablica display">
 
@@ -1545,7 +1642,7 @@ Naš cilj je steći ugodno i dugoročno poslovanje,te Vam omogućiti bezbrižno 
             </p>
 
         </div>
-</div>
+</div> -->
 
         <div class="cjenik-gumbi scroll-animacija">
 
@@ -1902,10 +1999,14 @@ Iskustva naših klijenata najbolje govore o našoj usluzi i povjerenju koje grad
 Hvala vam na povjerenju!</p>
 
     
-<div class="recenzije scroll-animacija">
-       <script defer async src='https://cdn.trustindex.io/loader.js?a1a295c82187381ff20638b9b18'></script>
-
+<div class="reviews-slider-container">
+    <div id="reviews-wrapper">
+        <p>Učitavanje recenzija...</p>
     </div>
+    <!-- Gumbi za ručno okretanje -->
+    <button class="slider-btn prev-btn">&#10094;</button>
+    <button class="slider-btn next-btn">&#10095;</button>
+</div>
 
 </div>
 	
@@ -3802,6 +3903,403 @@ function prethodnaSoba() {
 
     prikaziSobu(trenutniSmjestaj);
 }
+
+  const API_KEY = 'AIzaSyCYwbFJEnclU-gHQk8akFP7pWoK9moVwFk';
+const PLACE_ID = 'ChIJwXs-nqh_ZkcRU9-3xZMxh3s';
+
+const REFRESH_HOURS = 46; // Novi API zahtjev svakih 46 sati
+const MONTHLY_REQUEST_LIMIT = 1000; // Osigurač: maksimalno 1000 upita mjesečno
+const ROTATION_SPEED = 4000; // Recenzije se mijenjaju svakih 4 sekunde
+
+const wrapper = document.getElementById('reviews-wrapper');
+
+let currentIndex = 0;
+let reviewsData = [];
+
+
+/* =========================================================
+   MJesečni brojač API zahtjeva
+   ========================================================= */
+
+function checkAndIncrementMonthlyCounter() {
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+
+    const counterKey = `api_counter_${currentYear}_${currentMonth}`;
+
+    let currentCount = parseInt(
+        localStorage.getItem(counterKey) || '0'
+    );
+
+    if (currentCount >= MONTHLY_REQUEST_LIMIT) {
+        console.warn(
+            "Kôd je blokirao API zahtjev jer je dosegnut limit od 1000 upita za ovaj mjesec."
+        );
+
+        return false;
+    }
+
+    localStorage.setItem(
+        counterKey,
+        (currentCount + 1).toString()
+    );
+
+    return true;
+}
+
+
+/* =========================================================
+   Dohvaćanje recenzija s Google Places API-ja (New)
+   ========================================================= */
+
+async function fetchGoogleReviews() {
+
+    if (!checkAndIncrementMonthlyCounter()) {
+        return null;
+    }
+
+    const url =
+        `https://places.googleapis.com/v1/places/${PLACE_ID}`;
+
+    try {
+
+        const response = await fetch(url, {
+            method: "GET",
+
+            headers: {
+                "X-Goog-Api-Key": API_KEY,
+                "X-Goog-FieldMask": "reviews"
+            }
+        });
+
+        const data = await response.json();
+
+        console.log(
+            "Google Places odgovor:",
+            data
+        );
+
+
+        /* Ako Google vrati grešku */
+
+        if (!response.ok) {
+
+            console.error(
+                "Google Places API greška:",
+                data
+            );
+
+            return null;
+        }
+
+
+        /* Ako postoje recenzije */
+
+        if (data.reviews) {
+
+            localStorage.setItem(
+                "cached_google_reviews",
+                JSON.stringify(data.reviews)
+            );
+
+            localStorage.setItem(
+                "reviews_timestamp",
+                Date.now().toString()
+            );
+
+            return data.reviews;
+        }
+
+
+        console.error(
+            "Google nije vratio recenzije:",
+            data
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Greška pri komunikaciji s Google Places API-jem:",
+            error
+        );
+    }
+
+    return null;
+}
+
+
+/* =========================================================
+   Učitavanje recenzija
+   ========================================================= */
+
+async function initReviews() {
+
+    const cachedReviews =
+        localStorage.getItem(
+            'cached_google_reviews'
+        );
+
+    const lastFetched =
+        localStorage.getItem(
+            'reviews_timestamp'
+        );
+
+
+    const refreshTimeMs =
+        REFRESH_HOURS *
+        60 *
+        60 *
+        1000;
+
+
+    const isTimeUp =
+        !lastFetched ||
+        (
+            Date.now() -
+            parseInt(lastFetched)
+            >
+            refreshTimeMs
+        );
+
+
+    /* Ako nema spremljenih podataka
+       ili je prošlo 46 sati */
+
+    if (!cachedReviews || isTimeUp) {
+
+        const freshData =
+            await fetchGoogleReviews();
+
+
+        if (freshData) {
+
+            reviewsData =
+                freshData;
+
+        } else if (cachedReviews) {
+
+            /*
+             Ako API trenutno ne radi,
+             koristi zadnje spremljene recenzije.
+            */
+
+            reviewsData =
+                JSON.parse(
+                    cachedReviews
+                );
+        }
+
+    } else {
+
+        /*
+         Koristi spremljene recenzije
+         ako 46 sati još nije prošlo.
+        */
+
+        reviewsData =
+            JSON.parse(
+                cachedReviews
+            );
+    }
+
+
+    renderReviewsHTML();
+}
+
+
+/* =========================================================
+   Prikaz recenzija
+   ========================================================= */
+
+function renderReviewsHTML() {
+
+    if (
+        !reviewsData ||
+        reviewsData.length === 0
+    ) {
+
+        wrapper.innerHTML =
+            "<p>Trenutno nema dostupnih recenzija.</p>";
+
+        return;
+    }
+
+
+    wrapper.innerHTML = '';
+
+    currentIndex = 0;
+
+
+    reviewsData.forEach(
+        (review, index) => {
+
+            const card =
+                document.createElement('div');
+
+
+            card.className =
+                `review-card ${
+                    index === 0
+                        ? 'active'
+                        : ''
+                }`;
+
+
+            /* Zvjezdice */
+
+            const rating =
+                Number(review.rating) || 0;
+
+
+            const starsText =
+                '★'.repeat(rating) +
+                '☆'.repeat(5 - rating);
+
+
+            /* Tekst recenzije */
+
+            const reviewText =
+                review.text ||
+                'Korisnik je ostavio samo ocjenu, bez teksta.';
+
+
+            /* Ime autora */
+
+            const authorName =
+                review.authorAttribution?.displayName ||
+                review.author_name ||
+                'Google korisnik';
+
+
+            card.innerHTML =
+
+                '<div class="stars">' +
+                    starsText +
+                '</div>' +
+
+                '<p class="review-text">' +
+                    '"' +
+                    reviewText +
+                    '"' +
+                '</p>' +
+
+                '<h4 class="review-author">' +
+                    authorName +
+                '</h4>';
+
+
+            /*
+             VAŽNO:
+             Dodavanje kartice u reviews-wrapper.
+            */
+
+            wrapper.appendChild(card);
+        }
+    );
+
+
+    startSliderLogic();
+}
+
+
+/* =========================================================
+   Slider recenzija
+   ========================================================= */
+
+function startSliderLogic() {
+
+    const cards =
+        document.querySelectorAll(
+            '.review-card'
+        );
+
+
+    const prevBtn =
+        document.querySelector(
+            '.prev-btn'
+        );
+
+
+    const nextBtn =
+        document.querySelector(
+            '.next-btn'
+        );
+
+
+    /* Ako nema više od jedne recenzije */
+
+    if (cards.length <= 1) {
+        return;
+    }
+
+
+    function showNextReview(index) {
+
+        cards[currentIndex]
+            .classList
+            .remove('active');
+
+
+        currentIndex =
+            (index + cards.length) %
+            cards.length;
+
+
+        cards[currentIndex]
+            .classList
+            .add('active');
+    }
+
+
+    /* Lijeva strelica */
+
+    if (prevBtn) {
+
+        prevBtn.onclick =
+            () => {
+
+                showNextReview(
+                    currentIndex - 1
+                );
+            };
+    }
+
+
+    /* Desna strelica */
+
+    if (nextBtn) {
+
+        nextBtn.onclick =
+            () => {
+
+                showNextReview(
+                    currentIndex + 1
+                );
+            };
+    }
+
+
+    /* Automatsko mijenjanje */
+
+    setInterval(
+        () => {
+
+            showNextReview(
+                currentIndex + 1
+            );
+
+        },
+        ROTATION_SPEED
+    );
+}
+
+
+/* =========================================================
+   Pokretanje
+   ========================================================= */
+
+initReviews();
+
 </script>
 
 </body>
