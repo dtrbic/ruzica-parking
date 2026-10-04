@@ -5141,30 +5141,51 @@ body {
 
 }
 
- /* Moderni i responzivni stilovi za vrteći slider */
-    .reviews-slider-container {
+/* =========================================
+   RECENZIJE - MODERNE KARTICE
+========================================= */
+
+.reviews-slider-container {
     position: relative;
-    width: min(700px, 92%);
+    width: min(1100px, 92%);
     margin: 40px auto;
-    padding: 45px 75px 40px;
-    background: #ffffff;
-    border-radius: 22px;
-    box-shadow: 0 10px 30px rgba(11, 37, 92, 0.15);
+    padding: 25px 65px;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
     text-align: center;
-    overflow: hidden;
+    overflow: visible;
     font-family: Arial, sans-serif;
     box-sizing: border-box;
 }
 
-/* POJEDINAČNA RECENZIJA */
+
+/* =========================================
+   POJEDINAČNA RECENZIJA
+========================================= */
 
 .review-card {
     display: none;
     animation: fadeEffect 0.6s ease-in-out;
-    min-height: 240px;
+
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 25px 30px;
+    min-height: 245px;
+
     box-sizing: border-box;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    cursor: default;
 }
 
+/* Aktivna recenzija */
 .review-card.active {
     display: flex;
     flex-direction: column;
@@ -5172,70 +5193,106 @@ body {
     justify-content: center;
 }
 
-/* ZVJEZDICE */
+/* POP-UP EFEKT KAD PREĐEŠ MIŠEM */
+.review-card.active:hover {
+    transform: translateY(-8px) scale(1.015);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================
+   ZVJEZDICE
+========================================= */
 
 .stars {
     color: #ffb300;
-    font-size: 27px;
-    letter-spacing: 2px;
-    margin-bottom: 18px;
+    font-size: 25px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
     line-height: 1;
 }
 
-/* TEKST RECENZIJE */
+
+/* =========================================
+   TEKST RECENZIJE
+========================================= */
 
 .review-text {
-    font-style: italic;
-    font-size: 17px;
-    color: #243447;
-    line-height: 1.65;
-    margin: 5px auto 25px;
-    max-width: 500px;
-    min-height: 70px;
+    font-style: normal;
+    font-size: 15px;
+    color: #222;
+    line-height: 1.5;
+
+    margin: 5px auto 18px;
+
+    max-width: 430px;
+    min-height: 65px;
+
     word-wrap: break-word;
 }
 
-/* PROFIL + IME */
+
+/* =========================================
+   PROFIL + IME
+========================================= */
 
 .review-author-box {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+
+    gap: 5px;
     margin-top: 5px;
 }
 
 .review-avatar {
-    width: 48px;
-    height: 48px;
+    width: 58px;
+    height: 58px;
+
     border-radius: 50%;
     object-fit: cover;
     display: block;
-    border: 2px solid #e5e5e5;
+
+    border: 2px solid #eeeeee;
 }
 
 .review-author {
     margin: 0;
-    font-size: 16px;
+
+    font-size: 15px;
     font-weight: 700;
-    color: #0b255c;
+
+    color: #111;
 }
 
-/* DATUM */
+
+/* =========================================
+   DATUM
+========================================= */
 
 .review-date {
-    margin-top: 7px;
+    margin-top: 3px;
+
     font-size: 13px;
     color: #888;
 }
 
-/* GOOGLE LINK */
+
+/* =========================================
+   GOOGLE LINK
+========================================= */
 
 .google-review-link {
     display: inline-block;
-    margin-top: 12px;
+
+    margin-top: 8px;
+
     font-size: 12px;
-    color: #4285f4;
+    color: #888;
+
     text-decoration: none;
 }
 
@@ -5243,57 +5300,79 @@ body {
     text-decoration: underline;
 }
 
-/* STRELICE */
+
+/* =========================================
+   STRELICE
+========================================= */
 
 .slider-btn {
     position: absolute;
+
     top: 50%;
     transform: translateY(-50%);
-    width: 46px;
-    height: 46px;
+
+    width: 42px;
+    height: 42px;
+
     display: flex;
     align-items: center;
     justify-content: center;
 
-    background: #f1f3f5;
+    background: #ffffff;
     color: #0b255c;
 
     border: none;
-    font-size: 28px;
+
+    font-size: 25px;
     line-height: 1;
+
     cursor: pointer;
+
     border-radius: 50%;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 
     transition:
         background 0.25s ease,
         transform 0.25s ease,
-        color 0.25s ease;
+        color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .slider-btn:hover {
     background: #0b255c;
     color: #ffffff;
-    transform: translateY(-50%) scale(1.05);
+
+    transform: translateY(-50%) scale(1.08);
+
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
 }
 
 .prev-btn {
-    left: 18px;
+    left: 10px;
 }
 
 .next-btn {
-    right: 18px;
+    right: 10px;
 }
 
-/* AKO NEMA RECENZIJA */
+
+/* =========================================
+   AKO NEMA RECENZIJA
+========================================= */
 
 .no-reviews {
     padding: 30px;
     color: #555;
 }
 
-/* ANIMACIJA */
+
+/* =========================================
+   ANIMACIJA
+========================================= */
 
 @keyframes fadeEffect {
+
     from {
         opacity: 0;
         transform: translateY(8px);
@@ -5305,60 +5384,57 @@ body {
     }
 }
 
+
+/* =========================================
+   MOBITEL
+========================================= */
+
 @media (max-width: 700px) {
 
     .reviews-slider-container {
         width: 94%;
         margin: 30px auto;
-        padding: 35px 50px 30px;
-        border-radius: 18px;
+        padding: 20px 45px;
     }
 
     .review-card {
         min-height: 260px;
+        padding: 22px 20px;
+    }
+
+    .review-card.active:hover {
+        transform: translateY(-4px) scale(1.01);
     }
 
     .stars {
         font-size: 23px;
-        letter-spacing: 1px;
-        margin-bottom: 15px;
     }
 
     .review-text {
         font-size: 15px;
-        line-height: 1.55;
-        margin-bottom: 20px;
-        min-height: 80px;
+        line-height: 1.5;
     }
 
     .review-avatar {
-        width: 44px;
-        height: 44px;
+        width: 52px;
+        height: 52px;
     }
 
     .review-author {
         font-size: 15px;
     }
 
-    .review-date {
-        font-size: 12px;
-    }
-
-    .google-review-link {
-        font-size: 11px;
-    }
-
     .slider-btn {
         width: 38px;
         height: 38px;
-        font-size: 23px;
+        font-size: 22px;
     }
 
     .prev-btn {
-        left: 8px;
+        left: 3px;
     }
 
     .next-btn {
-        right: 8px;
+        right: 3px;
     }
 }
