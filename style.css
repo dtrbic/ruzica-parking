@@ -5142,68 +5142,72 @@ body {
 }
 
 /* =========================================
-   RECENZIJE - 3 KARTICE U JEDNOM REDU
+   RECENZIJE - IZGLED KAO GOOGLE RECENZIJE
 ========================================= */
 
 .reviews-slider-container {
     position: relative;
     width: 92%;
     max-width: 1100px;
-    margin: 40px auto;
-    padding: 20px 50px;
-    background: transparent;
+    margin: 55px auto;
+    padding: 0 45px;
     box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+
     font-family: Arial, sans-serif;
 }
 
 
-/* 3 recenzije u jednom redu */
-.reviews-slider-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
-
-
 /* =========================================
-   POJEDINAČNA KARTICA
+   KARTICA
 ========================================= */
 
 .review-card,
 .review-card.active {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+
+    position: relative;
 
     background: #ffffff;
-    border-radius: 14px;
 
-    padding: 20px 18px 22px;
+    border-radius: 10px;
 
     min-height: 245px;
+
+    padding: 0 25px 22px;
+
     box-sizing: border-box;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.15);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
 
-    animation: fadeEffect 0.6s ease-in-out;
+    animation: none;
 }
 
 
-/* POP-UP KAD PREĐEŠ MIŠEM */
-.review-card:hover {
-    transform: translateY(-7px) scale(1.02);
+/* POP-UP EFEKT */
 
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+.review-card:hover {
+    transform: translateY(-8px) scale(1.025);
+
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.20);
+
+    z-index: 5;
 }
 
 
 /* =========================================
-   SLIKA PROFILA - PRVA
+   PROFILNA SLIKA
 ========================================= */
 
 .review-avatar {
@@ -5211,50 +5215,20 @@ body {
     height: 58px;
 
     border-radius: 50%;
+
     object-fit: cover;
 
     display: block;
 
-    margin-bottom: 10px;
+    margin-top: -29px;
+    margin-bottom: 12px;
 
     border: 2px solid #eeeeee;
-}
 
+    background: white;
 
-/* =========================================
-   ZVJEZDICE - ISPOD SLIKE
-========================================= */
-
-.stars {
-    color: #ffb300;
-
-    font-size: 22px;
-    letter-spacing: 1px;
-    line-height: 1;
-
-    margin-bottom: 12px;
-}
-
-
-/* =========================================
-   TEKST - ISPOD ZVJEZDICA
-========================================= */
-
-.review-text {
-    font-style: normal;
-
-    font-size: 14px;
-    color: #222;
-
-    line-height: 1.5;
-
-    text-align: center;
-
-    margin: 0 auto 12px;
-
-    max-width: 300px;
-
-    word-wrap: break-word;
+    position: relative;
+    z-index: 2;
 }
 
 
@@ -5269,16 +5243,19 @@ body {
 
     gap: 3px;
 
-    margin-top: auto;
+    margin: 0;
+
+    width: 100%;
 }
 
 .review-author {
     margin: 0;
 
     font-size: 15px;
+
     font-weight: 700;
 
-    color: #111;
+    color: #111111;
 }
 
 
@@ -5287,10 +5264,51 @@ body {
 ========================================= */
 
 .review-date {
-    margin-top: 3px;
+    margin: 2px 0 10px;
 
-    font-size: 12px;
-    color: #888;
+    font-size: 13px;
+
+    color: #888888;
+}
+
+
+/* =========================================
+   ZVJEZDICE
+========================================= */
+
+.stars {
+    color: #fbbc04;
+
+    font-size: 21px;
+
+    letter-spacing: 1px;
+
+    line-height: 1;
+
+    margin: 0 0 11px;
+}
+
+
+/* =========================================
+   TEKST RECENZIJE
+========================================= */
+
+.review-text {
+    margin: 0 auto;
+
+    max-width: 320px;
+
+    font-size: 15px;
+
+    line-height: 1.45;
+
+    text-align: center;
+
+    color: #222222;
+
+    font-style: normal;
+
+    word-wrap: break-word;
 }
 
 
@@ -5301,11 +5319,12 @@ body {
 .google-review-link {
     display: inline-block;
 
-    margin-top: 6px;
+    margin-top: 12px;
 
-    font-size: 11px;
+    font-size: 12px;
 
-    color: #888;
+    color: #888888;
+
     text-decoration: none;
 }
 
@@ -5322,6 +5341,7 @@ body {
     position: absolute;
 
     top: 50%;
+
     transform: translateY(-50%);
 
     width: 42px;
@@ -5332,25 +5352,39 @@ body {
     justify-content: center;
 
     background: #ffffff;
-    color: #0b255c;
+
+    color: #555555;
 
     border: none;
+
     border-radius: 50%;
 
-    font-size: 25px;
+    font-size: 27px;
+
+    line-height: 1;
 
     cursor: pointer;
 
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.12);
 
-    transition: all 0.25s ease;
+    z-index: 10;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
 .slider-btn:hover {
-    background: #0b255c;
-    color: #ffffff;
+    background: #ffffff;
+
+    color: #333333;
 
     transform: translateY(-50%) scale(1.08);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.18);
 }
 
 .prev-btn {
@@ -5369,12 +5403,10 @@ body {
 @keyframes fadeEffect {
     from {
         opacity: 0;
-        transform: translateY(8px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 }
 
@@ -5386,12 +5418,30 @@ body {
 @media (max-width: 800px) {
 
     .reviews-slider-container {
-        grid-template-columns: 1fr;
         width: 90%;
-        padding: 20px 35px;
+        padding: 0 30px;
+
+        grid-template-columns: 1fr;
+
+        gap: 35px;
     }
 
     .review-card {
         min-height: 240px;
+    }
+
+    .review-avatar {
+        width: 54px;
+        height: 54px;
+
+        margin-top: -27px;
+    }
+
+    .stars {
+        font-size: 20px;
+    }
+
+    .review-text {
+        font-size: 14px;
     }
 }
