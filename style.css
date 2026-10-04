@@ -5142,67 +5142,53 @@ body {
 }
 
 /* =========================================
-   RECENZIJE - 3 U JEDNOM REDU
+   RECENZIJE - RASPORD 3 U JEDNOM REDU
 ========================================= */
 
 .reviews-slider-container {
-    position: relative;
-
-    width: 92%;
-    max-width: 1100px;
-
-    margin: 55px auto;
-    padding: 0 45px;
-
-    box-sizing: border-box;
-
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-
     gap: 15px;
 
+    position: relative;
+    width: 92%;
+    max-width: 1100px;
+    margin: 55px auto;
+    padding: 0 45px;
+    box-sizing: border-box;
     overflow: visible;
-
     font-family: Arial, sans-serif;
 }
 
 
 /* =========================================
-   3 KARTICE VODORAVNO
+   KARTICA (3 KOMADA U REDU, SADRŽAJ OKOMITO)
 ========================================= */
 
 .review-card,
 .review-card.active {
     display: flex !important;
-
     flex: 0 0 calc((100% - 30px) / 3) !important;
     width: calc((100% - 30px) / 3) !important;
     max-width: calc((100% - 30px) / 3) !important;
-
     min-width: 0 !important;
-
     box-sizing: border-box;
 
+    /* ISPRAVLJENO: Sadržaj unutar kartice ide odozgo prema dolje i centriran je */
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
     position: relative;
-
     background: #ffffff;
-
     border-radius: 10px;
-
     padding: 0 25px 22px;
-
     min-height: 245px;
-
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
-
     animation: none;
 }
 
@@ -5213,70 +5199,55 @@ body {
 
 .review-card:hover {
     transform: translateY(-8px) scale(1.025);
-
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.20);
-
     z-index: 20;
 }
 
 
 /* =========================================
-   PROFILNA SLIKA
+   PROFILNA SLIKA (AVATAR)
 ========================================= */
 
 .review-avatar {
     width: 58px;
     height: 58px;
-
     border-radius: 50%;
-
     object-fit: cover;
-
-    margin-top: -29px;
-    margin-bottom: 10px;
-
+    
+    /* Negativna margina sada radi ispravno jer kartica ima smjer 'column' */
+    margin-top: -29px; 
+    margin-bottom: 12px;
     border: 2px solid #eeeeee;
-
     background: white;
-
     position: relative;
     z-index: 2;
 }
 
 
 /* =========================================
-   IME + DATUM
+   IME + DATUM (OKOMITO UNUTAR KARTICE)
 ========================================= */
 
 .review-author-box {
     display: flex;
-
+    /* ISPRAVLJENO: Ime i datum idu jedan ispod drugog */
     flex-direction: column;
-
     align-items: center;
-
-    gap: 3px;
-
-    margin: 0;
-
+    gap: 4px;
+    margin: 0 0 10px 0;
     width: 100%;
 }
 
 .review-author {
     margin: 0;
-
     font-size: 15px;
-
     font-weight: 700;
-
     color: #111111;
 }
 
 .review-date {
-    margin: 2px 0 10px;
-
+    margin: 0;
     font-size: 13px;
-
     color: #888888;
 }
 
@@ -5287,34 +5258,24 @@ body {
 
 .stars {
     color: #fbbc04;
-
     font-size: 21px;
-
     letter-spacing: 1px;
-
     line-height: 1;
-
     margin: 0 0 11px;
 }
 
 
 /* =========================================
-   TEKST
+   TEKST RECENZIJE
 ========================================= */
 
 .review-text {
     margin: 0 auto;
-
-    max-width: 320px;
-
-    font-size: 15px;
-
+    max-width: 100%; /* Oslobođeno kako bi pratilo širinu kartice */
+    font-size: 13px;
     line-height: 1.45;
-
     text-align: center;
-
     color: #222222;
-
     font-style: normal;
 }
 
@@ -5325,56 +5286,38 @@ body {
 
 .google-review-link {
     display: inline-block;
-
     margin-top: 12px;
-
     font-size: 12px;
-
     color: #888888;
-
     text-decoration: none;
 }
 
 
 /* =========================================
-   STRELICE
+   STRELICE ZA SLIDER
 ========================================= */
 
 .slider-btn {
     position: absolute;
-
     top: 50%;
-
     transform: translateY(-50%);
-
     width: 42px;
     height: 42px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     background: white;
-
     color: #555;
-
     border: none;
-
     border-radius: 50%;
-
     font-size: 27px;
-
     cursor: pointer;
-
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-
     z-index: 30;
 }
 
 .slider-btn:hover {
     transform: translateY(-50%) scale(1.08);
-
     box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
 }
 
@@ -5388,27 +5331,21 @@ body {
 
 
 /* =========================================
-   MOBITEL
+   PRILAGODBA ZA MOBITELE (SLAGANJE JEDAN ISPOD DRUGOG)
 ========================================= */
 
 @media (max-width: 800px) {
-
     .reviews-slider-container {
         width: 92%;
-
         padding: 0 30px;
-
         flex-direction: column !important;
-
         gap: 35px;
     }
 
     .review-card,
     .review-card.active {
         width: 100% !important;
-
         max-width: 100% !important;
-
         flex: 0 0 100% !important;
     }
 }
