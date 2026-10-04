@@ -5142,25 +5142,31 @@ body {
 }
 
 /* =========================================
-   RECENZIJE - RASPORD 3 U JEDNOM REDU
+   RECENZIJE - GLAVNI KONTEJNER
 ========================================= */
 
 .reviews-slider-container {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    gap: 15px;
-
     position: relative;
     width: 92%;
     max-width: 1100px;
     margin: 55px auto;
     padding: 0 45px;
     box-sizing: border-box;
-    overflow: visible;
+    overflow: visible; /* Promijeniti u hidden ako radite slider koji se skriva */
     font-family: Arial, sans-serif;
 }
 
+/* =========================================
+   ISPRAVAK: Omotač koji drži točno 3 kartice u redu
+========================================= */
+
+#reviews-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 15px;
+    width: 100%;
+}
 
 /* =========================================
    KARTICA (3 KOMADA U REDU, SADRŽAJ OKOMITO)
@@ -5169,13 +5175,16 @@ body {
 .review-card,
 .review-card.active {
     display: flex !important;
+    
+    /* Računica za točno 3 kartice u redu s gapom od 15px */
     flex: 0 0 calc((100% - 30px) / 3) !important;
     width: calc((100% - 30px) / 3) !important;
     max-width: calc((100% - 30px) / 3) !important;
+    
     min-width: 0 !important;
     box-sizing: border-box;
 
-    /* ISPRAVLJENO: Sadržaj unutar kartice ide odozgo prema dolje i centriran je */
+    /* Sadržaj unutar kartice ide odozgo prema dolje */
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -5213,8 +5222,6 @@ body {
     height: 58px;
     border-radius: 50%;
     object-fit: cover;
-    
-    /* Negativna margina sada radi ispravno jer kartica ima smjer 'column' */
     margin-top: -29px; 
     margin-bottom: 12px;
     border: 2px solid #eeeeee;
@@ -5230,7 +5237,6 @@ body {
 
 .review-author-box {
     display: flex;
-    /* ISPRAVLJENO: Ime i datum idu jedan ispod drugog */
     flex-direction: column;
     align-items: center;
     gap: 4px;
@@ -5271,7 +5277,7 @@ body {
 
 .review-text {
     margin: 0 auto;
-    max-width: 100%; /* Oslobođeno kako bi pratilo širinu kartice */
+    max-width: 100%; 
     font-size: 13px;
     line-height: 1.45;
     text-align: center;
@@ -5331,13 +5337,16 @@ body {
 
 
 /* =========================================
-   PRILAGODBA ZA MOBITELE (SLAGANJE JEDAN ISPOD DRUGOG)
+   PRILAGODBA ZA MOBITELE (1 ISPOD DRUGOG)
 ========================================= */
 
 @media (max-width: 800px) {
     .reviews-slider-container {
         width: 92%;
         padding: 0 30px;
+    }
+
+    #reviews-wrapper {
         flex-direction: column !important;
         gap: 35px;
     }
