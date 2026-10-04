@@ -1999,14 +1999,23 @@ Iskustva naših klijenata najbolje govore o našoj usluzi i povjerenju koje grad
 Hvala vam na povjerenju!</p>
 
     
-<div class="reviews-slider-container">
-    <div id="reviews-wrapper">
-        <p>Učitavanje recenzija...</p>
+<!-- Primjer kako mora izgledati struktura SVAKE pojedinačne kartice unutar #reviews-wrapper-a -->
+<div class="review-card">
+    <img src="URL_SLIKE" class="review-avatar" alt="Avatar">
+    
+    <div class="review-author-box">
+        <span class="review-author">Ime i Prezime</span>
     </div>
-    <!-- Gumbi za ručno okretanje -->
-    <button class="slider-btn prev-btn">&#10094;</button>
-    <button class="slider-btn next-btn">&#10095;</button>
+    
+    <div class="stars">★★★★★</div>
+    
+    <span class="review-date">5 months ago</span>
+    
+    <p class="review-text">Tekst recenzije ide ovdje...</p>
+    
+    <a href="#" class="google-review-link">Pogledaj recenziju na Googleu</a>
 </div>
+
 
 </div>
 	
@@ -4298,6 +4307,46 @@ function startSliderLogic() {
    ========================================================= */
 
 initReviews();
+
+
+// AUTOMATSKO OKRETANJE SLIDERA (3 po 3)
+let trenutniIndeks = 0;
+const wrapper = document.getElementById('reviews-wrapper');
+
+function okreniSlider(smjer) {
+    const kartice = document.querySelectorAll('.review-card');
+    // Budući da prikazujemo 3 kartice odjednom, maksimalni indeks je ukupan broj kartica minus 3
+    const maxIndeks = Math.ceil(kartice.length / 3) - 1;
+
+    if (smjer === 'naprijed') {
+        trenutniIndeks = (trenutniIndeks >= maxIndeks) ? 0 : trenutniIndeks + 1;
+    } else if (smjer === 'nazad') {
+        trenutniIndeks = (trenutniIndeks <= 0) ? maxIndeks : trenutniIndeks - 1;
+    }
+
+    // Pomiče wrapper ulijevo za 100% širine vidljivog dijela po grupi
+    wrapper.style.transform = `translateX(-${trenutniIndeks * 100}%)`;
+}
+
+// Pokreni automatsko prebacivanje svakih 5000 milisekundi (5 sekundi)
+let autoPrebacivanje = setInterval(() => okreniSlider('naprijed'), 5000);
+
+// Povezivanje s gumbima (strelicama) za ručno klikanje
+document.querySelector('.next-btn').addEventListener('click', () => {
+    okreniSlider('naprijed');
+    resetirajTimer();
+});
+
+document.querySelector('.prev-btn').addEventListener('click', () => {
+    okreniSlider('nazad');
+    resetirajTimer();
+});
+
+// Resetira timer od 5 sekundi ako korisnik sam klikne na strelicu
+function resetirajTimer() {
+    clearInterval(autoPrebacivanje);
+    autoPrebacivanje = setInterval(() => okreniSlider('naprijed'), 5000);
+}
 
 </script>
 

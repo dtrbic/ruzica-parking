@@ -5142,199 +5142,170 @@ body {
 }
 
 /* =========================================
-   RECENZIJE - GLAVNI KONTEJNER
+   RECENZIJE - GLAVNI KONTEJNER (CENTRIRAN)
 ========================================= */
 
 .reviews-slider-container {
     position: relative;
-    width: 92%;
-    max-width: 1100px;
+    width: 90%;
+    max-width: 1050px; /* Smanjeno kako bi cijeli slider bio uži i više u sredini */
     margin: 55px auto;
-    padding: 0 45px;
+    padding: 0 50px;
     box-sizing: border-box;
-    overflow: visible; /* Promijeniti u hidden ako radite slider koji se skriva */
+    overflow: hidden; /* Skriva četvrtu i ostale kartice koje nisu u prva tri mjesta */
     font-family: Arial, sans-serif;
 }
 
 /* =========================================
-   ISPRAVAK: Omotač koji drži točno 3 kartice u redu
+   OMOTAČ KARTICA
 ========================================= */
 
 #reviews-wrapper {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 15px;
+    gap: 20px; /* Razmak između kartica */
     width: 100%;
+    transition: transform 0.5s ease-in-out; /* Glatki prijelaz prilikom okretanja */
 }
 
 /* =========================================
-   KARTICA (3 KOMADA U REDU, SADRŽAJ OKOMITO)
+   KARTICA (SMANJENA, TOČNO 3 U REDU, RASPODJELA ODOZGO PREMA DOLJE)
 ========================================= */
 
-.review-card,
-.review-card.active {
+.review-card {
     display: flex !important;
-    
-    /* Računica za točno 3 kartice u redu s gapom od 15px */
-    flex: 0 0 calc((100% - 30px) / 3) !important;
-    width: calc((100% - 30px) / 3) !important;
-    max-width: calc((100% - 30px) / 3) !important;
-    
+    /* Formula za točno 3 kartice u redu uzimajući u obzir gap od 20px */
+    flex: 0 0 calc((100% - 40px) / 3) !important;
+    width: calc((100% - 40px) / 3) !important;
+    max-width: calc((100% - 40px) / 3) !important;
     min-width: 0 !important;
     box-sizing: border-box;
 
-    /* Sadržaj unutar kartice ide odozgo prema dolje */
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    /* Svi elementi unutar kartice idu strogo odozgo prema dolje */
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
 
     position: relative;
     background: #ffffff;
-    border-radius: 10px;
-    padding: 0 25px 22px;
-    min-height: 245px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-    animation: none;
+    border-radius: 12px;
+    
+    /* Smanjen padding i min-height kako bi kartice bile manje i kompaktnije */
+    padding: 0 20px 20px;
+    min-height: 220px; 
+    
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    
+    /* Gurnite prvu stvar malo dolje kako bi slika koja viri imala mjesta */
+    margin-top: 30px; 
 }
 
-
-/* =========================================
-   POP-UP NA HOVER
-========================================= */
-
+/* Hover efekt povećavanja */
 .review-card:hover {
-    transform: translateY(-8px) scale(1.025);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.20);
-    z-index: 20;
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    z-index: 5;
 }
 
-
 /* =========================================
-   PROFILNA SLIKA (AVATAR)
+   ELEMENTI UNUTAR KARTICE (REDOSLIJED)
 ========================================= */
 
+/* 1. SLIKA PROFILA (Na samom vrhu, viri van kartice) */
 .review-avatar {
-    width: 58px;
-    height: 58px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
     object-fit: cover;
-    margin-top: -29px; 
-    margin-bottom: 12px;
-    border: 2px solid #eeeeee;
+    margin-top: -27px; /* Polovica visine kako bi idealno virila van */
+    margin-bottom: 10px;
+    border: 3px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     background: white;
     position: relative;
     z-index: 2;
 }
 
-
-/* =========================================
-   IME + DATUM (OKOMITO UNUTAR KARTICE)
-========================================= */
-
+/* 2. IME I PREZIME */
 .review-author-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    margin: 0 0 10px 0;
     width: 100%;
+    margin: 0 0 5px 0;
 }
 
 .review-author {
-    margin: 0;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     color: #111111;
-}
-
-.review-date {
     margin: 0;
-    font-size: 13px;
-    color: #888888;
 }
 
-
-/* =========================================
-   ZVJEZDICE
-========================================= */
-
+/* 3. ZVJEZDICE */
 .stars {
     color: #fbbc04;
-    font-size: 21px;
+    font-size: 18px;
     letter-spacing: 1px;
     line-height: 1;
-    margin: 0 0 11px;
+    margin: 0 0 5px 0;
 }
 
+/* 4. STAROST RECENZIJE (npr. 5 months ago) */
+.review-date {
+    font-size: 12px;
+    color: #777777;
+    margin: 0 0 12px 0;
+    font-weight: normal;
+}
 
-/* =========================================
-   TEKST RECENZIJE
-========================================= */
-
+/* 5. TEKST RECENZIJE */
 .review-text {
-    margin: 0 auto;
-    max-width: 100%; 
-    font-size: 13px;
-    line-height: 1.45;
-    text-align: center;
-    color: #222222;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: #333333;
+    margin: 0 0 10px 0;
+    max-width: 100%;
     font-style: normal;
 }
 
-
-/* =========================================
-   GOOGLE LINK
-========================================= */
-
+/* Google Link na dnu */
 .google-review-link {
     display: inline-block;
-    margin-top: 12px;
-    font-size: 12px;
-    color: #888888;
+    margin-top: auto; /* Gura link uvijek na samo dno kartice */
+    font-size: 11px;
+    color: #0066cc;
     text-decoration: none;
 }
 
-
 /* =========================================
-   STRELICE ZA SLIDER
+   STRELICE ZA RUČNO OKRETANJE
 ========================================= */
 
 .slider-btn {
     position: absolute;
-    top: 50%;
+    top: 55%;
     transform: translateY(-50%);
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
-    color: #555;
+    color: #333;
     border: none;
     border-radius: 50%;
-    font-size: 27px;
+    font-size: 20px;
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
-    z-index: 30;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 }
 
 .slider-btn:hover {
-    transform: translateY(-50%) scale(1.08);
-    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+    background: #f5f5f5;
 }
 
-.prev-btn {
-    left: 0;
-}
-
-.next-btn {
-    right: 0;
-}
-
+.prev-btn { left: 5px; }
+.next-btn { right: 5px; }
 
 /* =========================================
    PRILAGODBA ZA MOBITELE (1 ISPOD DRUGOG)
@@ -5342,19 +5313,23 @@ body {
 
 @media (max-width: 800px) {
     .reviews-slider-container {
-        width: 92%;
-        padding: 0 30px;
+        width: 95%;
+        padding: 0 20px;
+        overflow: visible;
     }
 
     #reviews-wrapper {
         flex-direction: column !important;
-        gap: 35px;
+        gap: 40px;
     }
 
-    .review-card,
-    .review-card.active {
+    .review-card {
         width: 100% !important;
         max-width: 100% !important;
         flex: 0 0 100% !important;
+        margin-top: 25px;
     }
+    
+    .slider-btn { display: none; } /* Sakrij strelice na mobitelu */
 }
+
