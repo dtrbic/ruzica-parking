@@ -2190,7 +2190,18 @@ text-align:center;
         background 0.2s ease,
         transform 0.2s ease;
 }
+/* Stara / sidrena cijena */
+.stara-cijena {
+    text-decoration: line-through;
+    color: #888 !important;
+    margin-right: 10px;
+    font-weight: 500;
+}
 
+.nova-cijena {
+    color: #2b6cb0 !important;
+    font-weight: 700;
+}
 
 /* Zadnji stupac */
 
@@ -4780,7 +4791,7 @@ body {
     }
 
 
-    /* CIJENA */
+    /* CIJENA 
 
     #price-result {
         width: 100%;
@@ -4788,7 +4799,9 @@ body {
         font-size: 17px;
         text-align: center;
         margin: 20px 0;
-    }
+    }*/
+	
+
 
 
     /* UPOZORENJE ZA PUTNIKE */
@@ -5147,89 +5160,105 @@ body {
 
 .reviews-slider-container {
     position: relative;
-    width: 92%;
-    max-width: 1100px;
+
+    width: 100%;
+    max-width: 1200px;
 
     margin: 55px auto;
 
-    padding: 30px 45px 35px;
+    padding: 30px 65px 40px;
 
     box-sizing: border-box;
 
-    overflow: visible;
+    overflow: hidden;
 
     font-family: Arial, sans-serif;
 }
 
 
 /* =========================================
-   OMOTAČ - 3 RECENZIJE U JEDNOM REDU
+   WRAPPER - 3 RECENZIJE U REDU
 ========================================= */
 
 #reviews-wrapper {
     display: flex !important;
+
     flex-direction: row !important;
     flex-wrap: nowrap !important;
 
-    gap: 15px;
+    justify-content: center !important;
+    align-items: stretch !important;
+
+    gap: 25px;
 
     width: 100%;
 
-    align-items: stretch;
+    margin: 0 auto;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 
 /* =========================================
-   POJEDINAČNA RECENZIJA
+   SAKRIJ SVE RECENZIJE
 ========================================= */
 
-.review-card,
+.review-card {
+    display: none !important;
+}
+
+
+/* =========================================
+   PRIKAŽI SAMO AKTIVNE RECENZIJE
+========================================= */
+
 .review-card.active {
     display: flex !important;
 
-    flex: 0 0 calc((100% - 30px) / 3) !important;
+    flex-direction: column !important;
 
-    width: calc((100% - 30px) / 3) !important;
-    max-width: calc((100% - 30px) / 3) !important;
+    align-items: center !important;
+
+    justify-content: flex-start !important;
+
+    flex: 0 0 calc((100% - 50px) / 3) !important;
+
+    width: calc((100% - 50px) / 3) !important;
+    max-width: calc((100% - 50px) / 3) !important;
 
     min-width: 0 !important;
 
-    box-sizing: border-box;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: flex-start;
-
     position: relative;
+
+    box-sizing: border-box;
 
     background: #ffffff;
 
-    border-radius: 10px;
+    border-radius: 12px;
 
-    padding: 20px 25px 25px;
+    padding: 25px 25px 30px;
 
-    min-height: 330px;
+    min-height: 380px;
 
     text-align: center;
 
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.13);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
-
-    animation: none;
 }
 
 
 /* =========================================
-   POP-UP EFEKT NA HOVER
+   HOVER
 ========================================= */
 
-.review-card:hover {
-    transform: translateY(-8px) scale(1.025);
+.review-card.active:hover {
+    transform: translateY(-7px);
 
     box-shadow:
         0 12px 28px rgba(0, 0, 0, 0.20);
@@ -5242,66 +5271,74 @@ body {
    PROFILNA SLIKA
 ========================================= */
 
-.review-avatar {
-    order: 1;
+.review-card.active .review-avatar {
+    order: 1 !important;
 
-    width: 58px;
-    height: 58px;
+    width: 65px;
+    height: 65px;
 
-    border-radius: 50%;
-
-    object-fit: cover;
+    flex-shrink: 0;
 
     display: block;
 
-    margin: 0 0 10px 0;
+    object-fit: cover;
+
+    border-radius: 50%;
 
     border: 2px solid #eeeeee;
 
     background: #ffffff;
 
-    position: relative;
-
-    z-index: 2;
+    margin: 0 auto 10px !important;
 }
 
 
 /* =========================================
-   IME + DATUM
+   IME + STAROST RECENZIJE
 ========================================= */
 
-.review-author-box {
-    order: 2;
+.review-card.active .review-author-box {
+    order: 2 !important;
 
-    display: flex;
+    display: flex !important;
 
-    flex-direction: column;
+    flex-direction: column !important;
 
-    align-items: center;
+    align-items: center !important;
 
-    justify-content: center;
-
-    gap: 3px;
-
-    margin: 0 0 10px 0;
+    justify-content: center !important;
 
     width: 100%;
+
+    margin: 0 0 14px !important;
+
+    gap: 4px;
 }
 
-.review-author {
-    margin: 0;
 
-    font-size: 15px;
+/* IME I PREZIME */
+
+.review-card.active .review-author {
+    margin: 0 !important;
+
+    font-size: 16px;
 
     font-weight: 700;
+
+    line-height: 1.3;
 
     color: #111111;
 }
 
-.review-date {
-    margin: 0;
+
+/* STAROST RECENZIJE */
+
+.review-card.active .review-date {
+    margin: 0 !important;
 
     font-size: 13px;
+
+    font-weight: 400;
 
     color: #888888;
 }
@@ -5311,18 +5348,20 @@ body {
    ZVJEZDICE
 ========================================= */
 
-.stars {
-    order: 3;
+.review-card.active .stars {
+    order: 3 !important;
+
+    display: block;
+
+    margin: 0 0 18px !important;
 
     color: #fbbc04;
 
-    font-size: 21px;
+    font-size: 22px;
 
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 
     line-height: 1;
-
-    margin: 0 0 12px;
 }
 
 
@@ -5330,18 +5369,19 @@ body {
    TEKST RECENZIJE
 ========================================= */
 
-.review-text {
-    order: 4;
+.review-card.active .review-text {
+    order: 4 !important;
 
     width: 100%;
-
     max-width: 300px;
 
-    margin: 0 auto;
+    margin: 0 auto !important;
+
+    padding: 0;
 
     font-size: 14px;
 
-    line-height: 1.5;
+    line-height: 1.55;
 
     text-align: center;
 
@@ -5349,9 +5389,9 @@ body {
 
     font-style: normal;
 
-    word-wrap: break-word;
-
     overflow-wrap: break-word;
+
+    word-wrap: break-word;
 }
 
 
@@ -5359,12 +5399,12 @@ body {
    GOOGLE LINK
 ========================================= */
 
-.google-review-link {
-    order: 5;
+.review-card.active .google-review-link {
+    order: 5 !important;
 
     display: inline-block;
 
-    margin-top: 12px;
+    margin-top: 15px !important;
 
     font-size: 12px;
 
@@ -5373,7 +5413,10 @@ body {
     text-decoration: none;
 }
 
-.google-review-link:hover {
+
+.review-card.active .google-review-link:hover {
+    color: #555555;
+
     text-decoration: underline;
 }
 
@@ -5389,13 +5432,12 @@ body {
 
     transform: translateY(-50%);
 
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     background: #ffffff;
@@ -5413,33 +5455,37 @@ body {
     cursor: pointer;
 
     box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.12);
+        0 3px 12px rgba(0, 0, 0, 0.16);
 
     z-index: 30;
 
     transition:
         transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+        box-shadow 0.2s ease;
 }
+
 
 .slider-btn:hover {
-    background: #ffffff;
-
-    color: #333333;
-
-    transform: translateY(-50%) scale(1.08);
+    transform:
+        translateY(-50%)
+        scale(1.08);
 
     box-shadow:
-        0 5px 14px rgba(0, 0, 0, 0.18);
+        0 6px 16px rgba(0, 0, 0, 0.20);
 }
+
+
+/* LIJEVA STRELICA */
 
 .prev-btn {
-    left: 0;
+    left: 8px;
 }
 
+
+/* DESNA STRELICA */
+
 .next-btn {
-    right: 0;
+    right: 8px;
 }
 
 
@@ -5448,27 +5494,47 @@ body {
 ========================================= */
 
 .no-reviews {
+    width: 100%;
+
     padding: 30px;
 
-    color: #555555;
-
     text-align: center;
+
+    color: #555555;
 }
 
 
 /* =========================================
-   ANIMACIJA
+   TABLET
 ========================================= */
 
-@keyframes fadeEffect {
+@media (max-width: 1000px) {
 
-    from {
-        opacity: 0;
+    .reviews-slider-container {
+        width: 96%;
+
+        padding-left: 55px;
+        padding-right: 55px;
     }
 
-    to {
-        opacity: 1;
+    #reviews-wrapper {
+        gap: 15px;
     }
+
+    .review-card.active {
+        flex-basis:
+            calc((100% - 30px) / 3) !important;
+
+        width:
+            calc((100% - 30px) / 3) !important;
+
+        max-width:
+            calc((100% - 30px) / 3) !important;
+
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
 }
 
 
@@ -5479,40 +5545,55 @@ body {
 @media (max-width: 800px) {
 
     .reviews-slider-container {
-        width: 92%;
+        width: 94%;
 
-        padding: 25px 30px 30px;
+        padding:
+            25px 50px 30px;
     }
+
 
     #reviews-wrapper {
-        flex-direction: column !important;
+        display: flex !important;
 
-        gap: 35px;
+        justify-content: center !important;
+
+        width: 100%;
+
+        gap: 0;
     }
 
-    .review-card,
-    .review-card.active {
-        width: 100% !important;
 
-        max-width: 100% !important;
+    /* NA MOBITELU SAMO JEDNA */
+
+    .review-card.active {
+        display: none !important;
+    }
+
+
+    .review-card.active:first-of-type {
+        display: flex !important;
 
         flex: 0 0 100% !important;
 
-        min-height: 280px;
+        width: 100% !important;
+        max-width: 100% !important;
+
+        min-height: 330px;
     }
 
-    .review-avatar {
-        width: 55px;
-        height: 55px;
+
+    .review-card.active .review-avatar {
+        width: 60px;
+        height: 60px;
     }
 
-    .stars {
-        font-size: 20px;
-    }
 
-    .review-text {
+    .review-card.active .review-text {
         font-size: 14px;
+
+        max-width: 280px;
     }
+
 
     .slider-btn {
         width: 38px;
@@ -5521,11 +5602,30 @@ body {
         font-size: 23px;
     }
 
+
     .prev-btn {
         left: 3px;
     }
 
+
     .next-btn {
         right: 3px;
     }
+}
+/* STARA CIJENA - SIVA I PREKRIŽENA */
+#price-result.active .regular-price {
+    color: #999999 !important;
+    text-decoration: line-through !important;
+    text-decoration-color: #999999 !important;
+    text-decoration-thickness: 2px !important;
+    font-weight: 400 !important;
+    margin-left: 7px;
+    margin-right: 9px;
+}
+
+/* NOVA ZIMSKA CIJENA */
+#price-result.active .winter-price {
+    color: #222222 !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
 }
