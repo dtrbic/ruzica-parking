@@ -5142,194 +5142,390 @@ body {
 }
 
 /* =========================================
-   RECENZIJE - GLAVNI KONTEJNER (CENTRIRAN)
+   RECENZIJE - GLAVNI KONTEJNER
 ========================================= */
 
 .reviews-slider-container {
     position: relative;
-    width: 90%;
-    max-width: 1050px; /* Smanjeno kako bi cijeli slider bio uži i više u sredini */
+    width: 92%;
+    max-width: 1100px;
+
     margin: 55px auto;
-    padding: 0 50px;
+
+    padding: 30px 45px 35px;
+
     box-sizing: border-box;
-    overflow: hidden; /* Skriva četvrtu i ostale kartice koje nisu u prva tri mjesta */
+
+    overflow: visible;
+
     font-family: Arial, sans-serif;
 }
 
+
 /* =========================================
-   OMOTAČ KARTICA
+   OMOTAČ - 3 RECENZIJE U JEDNOM REDU
 ========================================= */
 
 #reviews-wrapper {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 20px; /* Razmak između kartica */
+
+    gap: 15px;
+
     width: 100%;
-    transition: transform 0.5s ease-in-out; /* Glatki prijelaz prilikom okretanja */
+
+    align-items: stretch;
 }
 
+
 /* =========================================
-   KARTICA (SMANJENA, TOČNO 3 U REDU, RASPODJELA ODOZGO PREMA DOLJE)
+   POJEDINAČNA RECENZIJA
 ========================================= */
 
-.review-card {
+.review-card,
+.review-card.active {
     display: flex !important;
-    /* Formula za točno 3 kartice u redu uzimajući u obzir gap od 20px */
-    flex: 0 0 calc((100% - 40px) / 3) !important;
-    width: calc((100% - 40px) / 3) !important;
-    max-width: calc((100% - 40px) / 3) !important;
+
+    flex: 0 0 calc((100% - 30px) / 3) !important;
+
+    width: calc((100% - 30px) / 3) !important;
+    max-width: calc((100% - 30px) / 3) !important;
+
     min-width: 0 !important;
+
     box-sizing: border-box;
 
-    /* Svi elementi unutar kartice idu strogo odozgo prema dolje */
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
 
     position: relative;
+
     background: #ffffff;
-    border-radius: 12px;
-    
-    /* Smanjen padding i min-height kako bi kartice bile manje i kompaktnije */
-    padding: 0 20px 20px;
-    min-height: 220px; 
-    
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    
-    /* Gurnite prvu stvar malo dolje kako bi slika koja viri imala mjesta */
-    margin-top: 30px; 
+
+    border-radius: 10px;
+
+    padding: 20px 25px 25px;
+
+    min-height: 330px;
+
+    text-align: center;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    animation: none;
 }
 
-/* Hover efekt povećavanja */
-.review-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    z-index: 5;
-}
 
 /* =========================================
-   ELEMENTI UNUTAR KARTICE (REDOSLIJED)
+   POP-UP EFEKT NA HOVER
 ========================================= */
 
-/* 1. SLIKA PROFILA (Na samom vrhu, viri van kartice) */
+.review-card:hover {
+    transform: translateY(-8px) scale(1.025);
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.20);
+
+    z-index: 20;
+}
+
+
+/* =========================================
+   PROFILNA SLIKA
+========================================= */
+
 .review-avatar {
-    width: 54px;
-    height: 54px;
+    order: 1;
+
+    width: 58px;
+    height: 58px;
+
     border-radius: 50%;
+
     object-fit: cover;
-    margin-top: -27px; /* Polovica visine kako bi idealno virila van */
-    margin-bottom: 10px;
-    border: 3px solid #ffffff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    background: white;
+
+    display: block;
+
+    margin: 0 0 10px 0;
+
+    border: 2px solid #eeeeee;
+
+    background: #ffffff;
+
     position: relative;
+
     z-index: 2;
 }
 
-/* 2. IME I PREZIME */
+
+/* =========================================
+   IME + DATUM
+========================================= */
+
 .review-author-box {
+    order: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    margin: 0 0 10px 0;
+
     width: 100%;
-    margin: 0 0 5px 0;
 }
 
 .review-author {
-    font-size: 14px;
-    font-weight: 700;
-    color: #111111;
     margin: 0;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color: #111111;
 }
 
-/* 3. ZVJEZDICE */
-.stars {
-    color: #fbbc04;
-    font-size: 18px;
-    letter-spacing: 1px;
-    line-height: 1;
-    margin: 0 0 5px 0;
-}
-
-/* 4. STAROST RECENZIJE (npr. 5 months ago) */
 .review-date {
-    font-size: 12px;
-    color: #777777;
-    margin: 0 0 12px 0;
-    font-weight: normal;
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #888888;
 }
 
-/* 5. TEKST RECENZIJE */
+
+/* =========================================
+   ZVJEZDICE
+========================================= */
+
+.stars {
+    order: 3;
+
+    color: #fbbc04;
+
+    font-size: 21px;
+
+    letter-spacing: 1px;
+
+    line-height: 1;
+
+    margin: 0 0 12px;
+}
+
+
+/* =========================================
+   TEKST RECENZIJE
+========================================= */
+
 .review-text {
-    font-size: 12.5px;
-    line-height: 1.4;
-    color: #333333;
-    margin: 0 0 10px 0;
-    max-width: 100%;
+    order: 4;
+
+    width: 100%;
+
+    max-width: 300px;
+
+    margin: 0 auto;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    text-align: center;
+
+    color: #222222;
+
     font-style: normal;
+
+    word-wrap: break-word;
+
+    overflow-wrap: break-word;
 }
 
-/* Google Link na dnu */
+
+/* =========================================
+   GOOGLE LINK
+========================================= */
+
 .google-review-link {
+    order: 5;
+
     display: inline-block;
-    margin-top: auto; /* Gura link uvijek na samo dno kartice */
-    font-size: 11px;
-    color: #0066cc;
+
+    margin-top: 12px;
+
+    font-size: 12px;
+
+    color: #888888;
+
     text-decoration: none;
 }
 
+.google-review-link:hover {
+    text-decoration: underline;
+}
+
+
 /* =========================================
-   STRELICE ZA RUČNO OKRETANJE
+   STRELICE
 ========================================= */
 
 .slider-btn {
     position: absolute;
-    top: 55%;
+
+    top: 50%;
+
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+
+    width: 42px;
+    height: 42px;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    background: white;
-    color: #333;
+
+    background: #ffffff;
+
+    color: #555555;
+
     border: none;
+
     border-radius: 50%;
-    font-size: 20px;
+
+    font-size: 27px;
+
+    line-height: 1;
+
     cursor: pointer;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    z-index: 10;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.12);
+
+    z-index: 30;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
 .slider-btn:hover {
-    background: #f5f5f5;
+    background: #ffffff;
+
+    color: #333333;
+
+    transform: translateY(-50%) scale(1.08);
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.18);
 }
 
-.prev-btn { left: 5px; }
-.next-btn { right: 5px; }
+.prev-btn {
+    left: 0;
+}
+
+.next-btn {
+    right: 0;
+}
+
 
 /* =========================================
-   PRILAGODBA ZA MOBITELE (1 ISPOD DRUGOG)
+   AKO NEMA RECENZIJA
+========================================= */
+
+.no-reviews {
+    padding: 30px;
+
+    color: #555555;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   ANIMACIJA
+========================================= */
+
+@keyframes fadeEffect {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   MOBITEL
 ========================================= */
 
 @media (max-width: 800px) {
+
     .reviews-slider-container {
-        width: 95%;
-        padding: 0 20px;
-        overflow: visible;
+        width: 92%;
+
+        padding: 25px 30px 30px;
     }
 
     #reviews-wrapper {
         flex-direction: column !important;
-        gap: 40px;
+
+        gap: 35px;
     }
 
-    .review-card {
+    .review-card,
+    .review-card.active {
         width: 100% !important;
-        max-width: 100% !important;
-        flex: 0 0 100% !important;
-        margin-top: 25px;
-    }
-    
-    .slider-btn { display: none; } /* Sakrij strelice na mobitelu */
-}
 
+        max-width: 100% !important;
+
+        flex: 0 0 100% !important;
+
+        min-height: 280px;
+    }
+
+    .review-avatar {
+        width: 55px;
+        height: 55px;
+    }
+
+    .stars {
+        font-size: 20px;
+    }
+
+    .review-text {
+        font-size: 14px;
+    }
+
+    .slider-btn {
+        width: 38px;
+        height: 38px;
+
+        font-size: 23px;
+    }
+
+    .prev-btn {
+        left: 3px;
+    }
+
+    .next-btn {
+        right: 3px;
+    }
+}
