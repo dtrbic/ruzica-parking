@@ -4303,20 +4303,28 @@ let reviewsData = [];
 
 
 /* =========================================================
-   MJesečni brojač API zahtjeva
-   ========================================================= */
+   MJESEČNI BROJAČ API ZAHTJEVA
+========================================================= */
 
 function checkAndIncrementMonthlyCounter() {
-    const currentMonth = new Date().getMonth();
-    const currentYear = new Date().getFullYear();
 
-    const counterKey = `api_counter_${currentYear}_${currentMonth}`;
+    const currentMonth =
+        new Date().getMonth();
 
-    let currentCount = parseInt(
-        localStorage.getItem(counterKey) || '0'
-    );
+    const currentYear =
+        new Date().getFullYear();
+
+    const counterKey =
+        `api_counter_${currentYear}_${currentMonth}`;
+
+    let currentCount =
+        parseInt(
+            localStorage.getItem(counterKey) || '0'
+        );
+
 
     if (currentCount >= MONTHLY_REQUEST_LIMIT) {
+
         console.warn(
             "Kôd je blokirao API zahtjev jer je dosegnut limit od 1000 upita za ovaj mjesec."
         );
@@ -4324,18 +4332,20 @@ function checkAndIncrementMonthlyCounter() {
         return false;
     }
 
+
     localStorage.setItem(
         counterKey,
         (currentCount + 1).toString()
     );
+
 
     return true;
 }
 
 
 /* =========================================================
-   Dohvaćanje recenzija s Google Places API-ja (New)
-   ========================================================= */
+   DOHVAĆANJE RECENZIJA S GOOGLE PLACES API-JA
+========================================================= */
 
 async function fetchGoogleReviews() {
 
@@ -4343,21 +4353,30 @@ async function fetchGoogleReviews() {
         return null;
     }
 
+
     const url =
         `https://places.googleapis.com/v1/places/${PLACE_ID}`;
 
+
     try {
 
-        const response = await fetch(url, {
-            method: "GET",
+        const response =
+            await fetch(
+                url,
+                {
+                    method: "GET",
 
-            headers: {
-                "X-Goog-Api-Key": API_KEY,
-                "X-Goog-FieldMask": "reviews"
-            }
-        });
+                    headers: {
+                        "X-Goog-Api-Key": API_KEY,
+                        "X-Goog-FieldMask": "reviews"
+                    }
+                }
+            );
 
-        const data = await response.json();
+
+        const data =
+            await response.json();
+
 
         console.log(
             "Google Places odgovor:",
@@ -4365,7 +4384,9 @@ async function fetchGoogleReviews() {
         );
 
 
-        /* Ako Google vrati grešku */
+        /* =========================================
+           AKO GOOGLE VRATI GREŠKU
+        ========================================= */
 
         if (!response.ok) {
 
@@ -4378,7 +4399,9 @@ async function fetchGoogleReviews() {
         }
 
 
-        /* Ako postoje recenzije */
+        /* =========================================
+           AKO POSTOJE RECENZIJE
+        ========================================= */
 
         if (data.reviews) {
 
@@ -4387,10 +4410,12 @@ async function fetchGoogleReviews() {
                 JSON.stringify(data.reviews)
             );
 
+
             localStorage.setItem(
                 "reviews_timestamp",
                 Date.now().toString()
             );
+
 
             return data.reviews;
         }
@@ -4401,6 +4426,7 @@ async function fetchGoogleReviews() {
             data
         );
 
+
     } catch (error) {
 
         console.error(
@@ -4409,13 +4435,14 @@ async function fetchGoogleReviews() {
         );
     }
 
+
     return null;
 }
 
 
 /* =========================================================
-   Učitavanje recenzija
-   ========================================================= */
+   UČITAVANJE RECENZIJA
+========================================================= */
 
 async function initReviews() {
 
@@ -4423,6 +4450,7 @@ async function initReviews() {
         localStorage.getItem(
             'cached_google_reviews'
         );
+
 
     const lastFetched =
         localStorage.getItem(
@@ -4447,8 +4475,9 @@ async function initReviews() {
         );
 
 
-    /* Ako nema spremljenih podataka
-       ili je prošlo 46 sati */
+    /* =========================================
+       AKO NEMA CACHEA ILI JE VRIJEME ISTEKLO
+    ========================================= */
 
     if (!cachedReviews || isTimeUp) {
 
@@ -4461,11 +4490,13 @@ async function initReviews() {
             reviewsData =
                 freshData;
 
-        } else if (cachedReviews) {
+        }
+
+        else if (cachedReviews) {
 
             /*
-             Ako API trenutno ne radi,
-             koristi zadnje spremljene recenzije.
+               Ako API trenutno ne radi,
+               koristi zadnje spremljene recenzije.
             */
 
             reviewsData =
@@ -4474,11 +4505,13 @@ async function initReviews() {
                 );
         }
 
-    } else {
+    }
+
+    else {
 
         /*
-         Koristi spremljene recenzije
-         ako 46 sati još nije prošlo.
+           Koristi spremljene recenzije
+           ako refresh vrijeme još nije prošlo.
         */
 
         reviewsData =
@@ -4492,109 +4525,306 @@ async function initReviews() {
 }
 
 
+/* =========================================================
+   GENERIRANJE RECENZIJA
+========================================================= */
+
 function renderReviewsHTML() {
-    if (!reviewsData || reviewsData.length === 0) {
+
+    if (
+        !reviewsData ||
+        reviewsData.length === 0
+    ) {
+
         wrapper.innerHTML =
             '<div class="no-reviews">' +
                 '<p>Trenutno nema dostupnih recenzija.</p>' +
             '</div>';
 
+
         return;
     }
 
+
+    /* Očisti loading tekst */
+
     wrapper.innerHTML = '';
+
+
+    /* Počni od prve recenzije */
+
     currentIndex = 0;
 
-    reviewsData.forEach((review, index) => {
 
-        const card = document.createElement('div');
-        card.className = `review-card ${index === 0 ? 'active' : ''}`;
-
-        // ⭐ Ocjena
-        const rating = Number(review.rating) || 0;
-
-        const stars = document.createElement('div');
-        stars.className = 'stars';
-        stars.textContent =
-            '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    reviewsData.forEach(
+        (review) => {
 
 
-        // 👤 Profilna slika
-        const authorBox = document.createElement('div');
-        authorBox.className = 'review-author-box';
+            /* =====================================
+               KARTICA
+            ===================================== */
 
-        const avatar = document.createElement('img');
-        avatar.className = 'review-avatar';
-        avatar.src =
-            review.authorAttribution?.photoUri ||
-            'slike/default-user.webp';
-        avatar.alt = 'Profilna fotografija autora recenzije';
+            const card =
+                document.createElement('div');
 
-        avatar.onerror = function () {
-            this.style.display = 'none';
-        };
 
-        // 👤 Ime autora
-        const authorName = document.createElement('div');
-        authorName.className = 'review-author';
+            card.className =
+                'review-card';
 
-        authorName.textContent =
-            review.authorAttribution?.displayName ||
-            'Google korisnik';
 
-        authorBox.appendChild(avatar);
-        authorBox.appendChild(authorName);
+            /* =====================================
+               PROFILNA SLIKA
+            ===================================== */
 
-        // 💬 Tekst recenzije
-        const reviewText = document.createElement('p');
-        reviewText.className = 'review-text';
+            const avatar =
+                document.createElement('img');
 
-        reviewText.textContent =
-            review.text?.text ||
-            review.originalText?.text ||
-            'Korisnik je ostavio samo ocjenu, bez teksta.';
 
-        // 📅 Datum
-        const reviewDate = document.createElement('div');
-        reviewDate.className = 'review-date';
+            avatar.className =
+                'review-avatar';
 
-        reviewDate.textContent =
-            review.relativePublishTimeDescription || '';
 
-        // 🔗 Google Maps link
-        const googleLink = document.createElement('a');
-        googleLink.className = 'google-review-link';
-        googleLink.href = review.googleMapsUri || '#';
-        googleLink.target = '_blank';
-        googleLink.rel = 'noopener noreferrer';
-        googleLink.textContent = 'Pogledaj recenziju na Googleu';
+            avatar.src =
+                review.authorAttribution?.photoUri ||
+                'slike/default-user.webp';
 
-        // Složi karticu
-        card.appendChild(stars);
-        card.appendChild(reviewText);
-        card.appendChild(authorBox);
-        card.appendChild(reviewDate);
 
-        if (review.googleMapsUri) {
-            card.appendChild(googleLink);
+            avatar.alt =
+                'Profilna fotografija autora recenzije';
+
+
+            avatar.onerror =
+                function () {
+
+                    /*
+                       Ako Google profilna ne radi,
+                       pokušaj prikazati default sliku.
+                    */
+
+                    if (
+                        !this.src.includes(
+                            'default-user.webp'
+                        )
+                    ) {
+
+                        this.src =
+                            'slike/default-user.webp';
+
+                    }
+
+                    else {
+
+                        /*
+                           Ako ni default slika ne postoji,
+                           samo sakrij sliku.
+                        */
+
+                        this.style.display =
+                            'none';
+                    }
+                };
+
+
+            /* =====================================
+               IME I PREZIME
+            ===================================== */
+
+            const authorName =
+                document.createElement('div');
+
+
+            authorName.className =
+                'review-author';
+
+
+            authorName.textContent =
+                review.authorAttribution?.displayName ||
+                'Google korisnik';
+
+
+            /* =====================================
+               STAROST RECENZIJE
+            ===================================== */
+
+            const reviewDate =
+                document.createElement('div');
+
+
+            reviewDate.className =
+                'review-date';
+
+
+            reviewDate.textContent =
+                review.relativePublishTimeDescription ||
+                '';
+
+
+            /* =====================================
+               ZVJEZDICE
+            ===================================== */
+
+            const rating =
+                Math.max(
+                    0,
+                    Math.min(
+                        5,
+                        Math.round(
+                            Number(review.rating) || 0
+                        )
+                    )
+                );
+
+
+            const stars =
+                document.createElement('div');
+
+
+            stars.className =
+                'stars';
+
+
+            stars.textContent =
+                '★'.repeat(rating) +
+                '☆'.repeat(5 - rating);
+
+
+            /* =====================================
+               TEKST RECENZIJE
+            ===================================== */
+
+            const reviewText =
+                document.createElement('p');
+
+
+            reviewText.className =
+                'review-text';
+
+
+            reviewText.textContent =
+                review.text?.text ||
+                review.originalText?.text ||
+                'Korisnik je ostavio samo ocjenu, bez teksta.';
+
+
+            /* =====================================
+               GOOGLE LINK
+            ===================================== */
+
+            const googleLink =
+                document.createElement('a');
+
+
+            googleLink.className =
+                'google-review-link';
+
+
+            googleLink.href =
+                review.googleMapsUri ||
+                '#';
+
+
+            googleLink.target =
+                '_blank';
+
+
+            googleLink.rel =
+                'noopener noreferrer';
+
+
+            googleLink.textContent =
+                'Pogledaj recenziju na Googleu';
+
+
+            /* =====================================
+               REDOSLIJED U KARTICI
+
+               1. Profilna
+               2. Ime
+               3. Starost recenzije
+               4. Zvjezdice
+               5. Tekst
+               6. Google link
+            ===================================== */
+
+
+            /* 1. PROFILNA */
+
+            card.appendChild(
+                avatar
+            );
+
+
+            /* 2. IME */
+
+            card.appendChild(
+                authorName
+            );
+
+
+            /* 3. STAROST RECENZIJE */
+
+            card.appendChild(
+                reviewDate
+            );
+
+
+            /* 4. ZVJEZDICE */
+
+            card.appendChild(
+                stars
+            );
+
+
+            /* 5. TEKST */
+
+            card.appendChild(
+                reviewText
+            );
+
+
+            /* 6. GOOGLE LINK */
+
+            if (review.googleMapsUri) {
+
+                card.appendChild(
+                    googleLink
+                );
+            }
+
+
+            /* =====================================
+               DODAJ KARTICU U WRAPPER
+            ===================================== */
+
+            wrapper.appendChild(
+                card
+            );
+
         }
+    );
 
-        wrapper.appendChild(card);
-    });
+
+    /* Pokreni slider */
 
     startSliderLogic();
 }
 
 
 /* =========================================================
-   Slider recenzija
-   ========================================================= */
+   SLIDER RECENZIJA
+
+   DESKTOP:
+   3 recenzije
+
+   MOBITEL:
+   1 recenzija
+========================================================= */
 
 function startSliderLogic() {
 
     const cards =
         document.querySelectorAll(
-            '.review-card'
+            '#reviews-wrapper .review-card'
         );
 
 
@@ -4610,77 +4840,238 @@ function startSliderLogic() {
         );
 
 
-    /* Ako nema više od jedne recenzije */
+    /* =========================================
+       AKO NEMA RECENZIJA
+    ========================================= */
 
-    if (cards.length <= 1) {
+    if (cards.length === 0) {
+
+        if (prevBtn) {
+            prevBtn.style.display =
+                'none';
+        }
+
+
+        if (nextBtn) {
+            nextBtn.style.display =
+                'none';
+        }
+
+
         return;
     }
 
 
-    function showNextReview(index) {
+    /* =========================================
+       BROJ VIDLJIVIH RECENZIJA
 
-        cards[currentIndex]
-            .classList
-            .remove('active');
+       Desktop = 3
+       Mobitel = 1
+    ========================================= */
+
+    function getVisibleCount() {
+
+        if (window.innerWidth <= 800) {
+
+            return 1;
+
+        }
 
 
-        currentIndex =
-            (index + cards.length) %
-            cards.length;
-
-
-        cards[currentIndex]
-            .classList
-            .add('active');
+        return Math.min(
+            3,
+            cards.length
+        );
     }
 
 
-    /* Lijeva strelica */
+    /* =========================================
+       PRIKAZ RECENZIJA
+    ========================================= */
+
+    function showReviews() {
+
+        const visibleCount =
+            getVisibleCount();
+
+
+        /* -------------------------------------
+           PRVO SAKRIJ SVE
+        ------------------------------------- */
+
+        cards.forEach(
+            (card) => {
+
+                card.classList.remove(
+                    'active'
+                );
+
+            }
+        );
+
+
+        /* -------------------------------------
+           PRIKAŽI 3 RECENZIJE NA DESKTOPU
+           ILI 1 NA MOBITELU
+        ------------------------------------- */
+
+        for (
+            let i = 0;
+            i < visibleCount;
+            i++
+        ) {
+
+            const index =
+                (
+                    currentIndex + i
+                ) %
+                cards.length;
+
+
+            cards[index]
+                .classList
+                .add(
+                    'active'
+                );
+        }
+
+
+        /* -------------------------------------
+           AKO IMA SAMO JEDNA RECENZIJA,
+           SAKRIJ STRELICE
+        ------------------------------------- */
+
+        if (cards.length <= 1) {
+
+            if (prevBtn) {
+
+                prevBtn.style.display =
+                    'none';
+
+            }
+
+
+            if (nextBtn) {
+
+                nextBtn.style.display =
+                    'none';
+
+            }
+
+        }
+
+        else {
+
+            if (prevBtn) {
+
+                prevBtn.style.display =
+                    'flex';
+
+            }
+
+
+            if (nextBtn) {
+
+                nextBtn.style.display =
+                    'flex';
+
+            }
+
+        }
+    }
+
+
+    /* =========================================
+       LIJEVA STRELICA
+    ========================================= */
 
     if (prevBtn) {
 
         prevBtn.onclick =
-            () => {
+            function () {
 
-                showNextReview(
-                    currentIndex - 1
-                );
+                currentIndex =
+                    (
+                        currentIndex -
+                        1 +
+                        cards.length
+                    ) %
+                    cards.length;
+
+
+                showReviews();
             };
     }
 
 
-    /* Desna strelica */
+    /* =========================================
+       DESNA STRELICA
+    ========================================= */
 
     if (nextBtn) {
 
         nextBtn.onclick =
-            () => {
+            function () {
 
-                showNextReview(
-                    currentIndex + 1
-                );
+                currentIndex =
+                    (
+                        currentIndex +
+                        1
+                    ) %
+                    cards.length;
+
+
+                showReviews();
             };
     }
 
 
-    /* Automatsko mijenjanje */
+    /* =========================================
+       PROMJENA VELIČINE PROZORA
+    ========================================= */
 
-    setInterval(
-        () => {
-
-            showNextReview(
-                currentIndex + 1
-            );
-
-        },
-        ROTATION_SPEED
+    window.addEventListener(
+        'resize',
+        showReviews
     );
+
+
+    /* =========================================
+       PRVI PRIKAZ
+    ========================================= */
+
+    showReviews();
+
+
+    /* =========================================
+       AUTOMATSKA ROTACIJA
+    ========================================= */
+
+    if (cards.length > 1) {
+
+        setInterval(
+            function () {
+
+                currentIndex =
+                    (
+                        currentIndex +
+                        1
+                    ) %
+                    cards.length;
+
+
+                showReviews();
+
+            },
+            ROTATION_SPEED
+        );
+    }
 }
 
 
 /* =========================================================
-   Pokretanje
-   ========================================================= */
+   POKRETANJE RECENZIJA
+========================================================= */
 
 initReviews();
 
