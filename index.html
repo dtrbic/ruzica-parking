@@ -4810,6 +4810,16 @@ function renderReviewsHTML() {
 }
 
 
+/* =========================================================
+   SLIDER RECENZIJA
+
+   DESKTOP:
+   3 recenzije
+
+   MOBITEL:
+   1 recenzija
+========================================================= */
+
 function startSliderLogic() {
 
     const cards =
@@ -4817,292 +4827,63 @@ function startSliderLogic() {
             '#reviews-wrapper .review-card'
         );
 
+
     const prevBtn =
-        document.querySelector('.prev-btn');
+        document.querySelector(
+            '.prev-btn'
+        );
+
 
     const nextBtn =
-        document.querySelector('.next-btn');
+        document.querySelector(
+            '.next-btn'
+        );
 
+
+    /* =========================================
+       AKO NEMA RECENZIJA
+    ========================================= */
 
     if (cards.length === 0) {
+
+        if (prevBtn) {
+            prevBtn.style.display =
+                'none';
+        }
+
+
+        if (nextBtn) {
+            nextBtn.style.display =
+                'none';
+        }
+
+
         return;
     }
 
 
-    let isAnimating = false;
-
-
     /* =========================================
        BROJ VIDLJIVIH RECENZIJA
+
+       Desktop = 3
+       Mobitel = 1
     ========================================= */
 
     function getVisibleCount() {
 
         if (window.innerWidth <= 800) {
+
             return 1;
-        }
 
-        return Math.min(3, cards.length);
-    }
-
-
-    /* =========================================
-       OČISTI ANIMACIJSKE KLASE
-    ========================================= */
-
-    function clearAnimationClasses() {
-
-        cards.forEach((card) => {
-
-            card.classList.remove(
-                'slide-out-left',
-                'slide-out-right',
-                'slide-in-left',
-                'slide-in-right'
-            );
-
-            card.style.animationDelay = '';
-        });
-    }
-
-
-    /* =========================================
-       PRIKAŽI TRENUTNE RECENZIJE
-    ========================================= */
-
-    function showReviews() {
-
-        const visibleCount =
-            getVisibleCount();
-
-
-        cards.forEach((card) => {
-
-            card.classList.remove('active');
-
-        });
-
-
-        for (
-            let i = 0;
-            i < visibleCount;
-            i++
-        ) {
-
-            const index =
-                (currentIndex + i) %
-                cards.length;
-
-            cards[index]
-                .classList
-                .add('active');
         }
 
 
-        if (cards.length <= 1) {
-
-            if (prevBtn) {
-                prevBtn.style.display = 'none';
-            }
-
-            if (nextBtn) {
-                nextBtn.style.display = 'none';
-            }
-
-        } else {
-
-            if (prevBtn) {
-                prevBtn.style.display = 'flex';
-            }
-
-            if (nextBtn) {
-                nextBtn.style.display = 'flex';
-            }
-        }
-    }
-
-
-    /* =========================================
-       ANIMIRANO POMICANJE SLIDERA
-       
-       direction = 1  → desno dugme
-                         kartice idu lijevo
-       
-       direction = -1 → lijevo dugme
-                         kartice idu desno
-    ========================================= */
-
-    function moveSlider(direction) {
-
-        if (isAnimating) {
-            return;
-        }
-
-        isAnimating = true;
-
-
-        const activeCards =
-            document.querySelectorAll(
-                '#reviews-wrapper .review-card.active'
-            );
-
-
-        /* =====================================
-           STARE KARTICE IZLAZE
-        ===================================== */
-
-        activeCards.forEach(
-            (card, index) => {
-
-                card.style.animationDelay =
-                    `${index * 80}ms`;
-
-                card.classList.add(
-                    direction === 1
-                        ? 'slide-out-left'
-                        : 'slide-out-right'
-                );
-            }
-        );
-
-
-        /* =====================================
-           NAKON IZLASKA PROMIJENI RECENZIJE
-        ===================================== */
-
-        setTimeout(() => {
-
-            clearAnimationClasses();
-
-
-            currentIndex =
-                (
-                    currentIndex +
-                    direction +
-                    cards.length
-                ) %
-                cards.length;
-
-
-            showReviews();
-
-
-            const newActiveCards =
-                document.querySelectorAll(
-                    '#reviews-wrapper .review-card.active'
-                );
-
-
-            /* =================================
-               NOVE KARTICE ULAZE
-            ================================= */
-
-            newActiveCards.forEach(
-                (card, index) => {
-
-                    card.style.animationDelay =
-                        `${index * 80}ms`;
-
-                    card.classList.add(
-                        direction === 1
-                            ? 'slide-in-right'
-                            : 'slide-in-left'
-                    );
-                }
-            );
-
-
-            /* =================================
-               OČISTI KLASE NAKON ANIMACIJE
-            ================================= */
-
-            setTimeout(() => {
-
-                clearAnimationClasses();
-
-                isAnimating = false;
-
-            }, 850);
-
-
-        }, 550);
-    }
-
-
-    /* =========================================
-       LIJEVA STRELICA
-    ========================================= */
-
-    if (prevBtn) {
-
-        prevBtn.onclick =
-            function () {
-
-                moveSlider(-1);
-
-            };
-    }
-
-
-    /* =========================================
-       DESNA STRELICA
-    ========================================= */
-
-    if (nextBtn) {
-
-        nextBtn.onclick =
-            function () {
-
-                moveSlider(1);
-
-            };
-    }
-
-
-    /* =========================================
-       PROMJENA VELIČINE PROZORA
-    ========================================= */
-
-    window.addEventListener(
-        'resize',
-        function () {
-
-            if (!isAnimating) {
-
-                clearAnimationClasses();
-
-                showReviews();
-            }
-        }
-    );
-
-
-    /* =========================================
-       PRVI PRIKAZ
-    ========================================= */
-
-    showReviews();
-
-
-    /* =========================================
-       AUTOMATSKA ROTACIJA
-
-       VAŽNO:
-       Koristi ISTU animaciju kao desna strelica.
-    ========================================= */
-
-    if (cards.length > 1) {
-
-        setInterval(
-            function () {
-
-                moveSlider(1);
-
-            },
-            ROTATION_SPEED
+        return Math.min(
+            3,
+            cards.length
         );
     }
-}
+
 
     /* =========================================
        PRIKAZ RECENZIJA
